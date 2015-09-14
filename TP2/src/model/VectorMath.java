@@ -119,6 +119,12 @@ public class VectorMath {
 		return true;
 	}
 
+	
+	@Override
+	public String toString() {
+		return Arrays.toString(coord);
+	}
+
 	public int getDim() {
 		return dim;
 	}

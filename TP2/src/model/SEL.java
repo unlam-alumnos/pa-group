@@ -18,7 +18,6 @@ public class SEL {
 			File archivo = new File(pathFile);
 			fr = new FileReader(archivo);
 
-			@SuppressWarnings("resource") // Me lo recomienda el eclipse, que es??
 			BufferedReader br = new BufferedReader(fr);
 			String datos[];
 			
@@ -54,7 +53,14 @@ public class SEL {
 	}
 	
 	public void resolver(){
-		// TODO: resolver el sistema de ecuciones
+		
+		try {
+			MatrizMath mat_inversa = coeficientes.getInversa();
+			solucion = mat_inversa.multiplicar(terminosIndependientes);
+			//error = terminosIndependientes.restar(coeficientes.multiplicar(solucion)).normaDos();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 	
 	public void escribirSalida(String pathFile){
@@ -87,6 +93,8 @@ public class SEL {
 		}
 		
 	}
-	
-	
+
+	public VectorMath getSolucion() {
+		return solucion;
+	}
 }

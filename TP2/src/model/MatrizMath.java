@@ -203,6 +203,27 @@ public class MatrizMath {
 		return true;
 	}
 	
+	
+	
+	@Override
+	public String toString() {
+		StringBuffer results = new StringBuffer();
+		String separator = ",";
+
+		for (int i = 0; i < this.filas; ++i)
+		{
+		  results.append('[');
+		  for (int j = 0; j < this.columnas; ++j)
+		    if (j > 0)
+		      results.append(matriz[i][j]);
+		    else
+		      results.append(matriz[i][j]).append(separator);
+		  results.append(']');
+		}
+		
+		return results.toString();
+	}
+
 	public int getFilas() {
 		return filas;
 	}
