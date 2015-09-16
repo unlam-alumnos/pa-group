@@ -72,15 +72,14 @@ public class SEL {
 			archivo = new FileWriter(pathFile);
 			pw = new PrintWriter(archivo);
 			
-			pw.println(this.dim);
-			
 			if (this.solucion != null) {
+				pw.println(this.dim);
 				for (int i = 0; i < this.solucion.getDim(); i++) {
 					pw.println(this.solucion.getCoord(i));
 				}
 				pw.println(this.error);
 			}else{
-				pw.println("SISTEMA SIN SOLUCION");
+				pw.println("EL SISTEMA NO SE PUEDE CALCULAR, TIENE INFINITAS SOLUCIONES O NINGUNA.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -114,6 +113,8 @@ public class SEL {
 			pw.println(dimension);
 			for (i = 0; i < dimension; i++) {
 				for (j = 0; j < dimension; j++)
+					// En este linea podria cambiarse el (int)(Math.random() * 11 + 1) 
+					// por cualquier otra instruccion que genere numeros random double por ejemplo
 					pw.println(i + " " + j + " " + (int)(Math.random() * 11 + 1));
 			}
 			for (i = 0; i < dimension; i++)
