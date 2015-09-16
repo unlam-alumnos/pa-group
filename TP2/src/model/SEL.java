@@ -18,6 +18,7 @@ public class SEL {
 			File archivo = new File(pathFile);
 			fr = new FileReader(archivo);
 
+			@SuppressWarnings("resource")
 			BufferedReader br = new BufferedReader(fr);
 			String datos[];
 			
@@ -57,7 +58,7 @@ public class SEL {
 		try {
 			MatrizMath mat_inversa = coeficientes.getInversa();
 			solucion = mat_inversa.multiplicar(terminosIndependientes);
-			//error = terminosIndependientes.restar(coeficientes.multiplicar(solucion)).normaDos();
+			error = terminosIndependientes.restar(coeficientes.multiplicar(solucion)).normaDos();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -71,7 +72,7 @@ public class SEL {
 			archivo = new FileWriter(pathFile);
 			pw = new PrintWriter(archivo);
 			
-			pw.println(this.solucion.getDim());
+			pw.println(this.dim);
 			
 			if (this.solucion != null) {
 				for (int i = 0; i < this.solucion.getDim(); i++) {
@@ -79,7 +80,7 @@ public class SEL {
 				}
 				pw.println(this.error);
 			}else{
-				pw.println("ERROR");
+				pw.println("SISTEMA SIN SOLUCION");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -96,5 +97,37 @@ public class SEL {
 
 	public VectorMath getSolucion() {
 		return solucion;
+	}
+	
+	public static void generadorAleatorioSEL_Simples(int dimension) {
+		// Por "Simple" entendemos coeficientes enteros entre 1 y 11 por ejemplo
+		int i, j;
+		FileWriter archivo = null;
+		String nombre_salida = "SEL_" + String.valueOf(dimension) + "x" + String.valueOf(dimension) + ".in";
+		
+		try {
+			archivo = new FileWriter(nombre_salida);
+
+			@SuppressWarnings("resource")
+			PrintWriter pw = new PrintWriter(archivo);
+
+			pw.println(dimension);
+			for (i = 0; i < dimension; i++) {
+				for (j = 0; j < dimension; j++)
+					pw.println(i + " " + j + " " + (int)(Math.random() * 11 + 1));
+			}
+			for (i = 0; i < dimension; i++)
+				pw.println((int)(Math.random() * 11 + 1));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (archivo != null)
+					archivo.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
 	}
 }

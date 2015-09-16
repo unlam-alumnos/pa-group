@@ -22,6 +22,11 @@ public class MatrizMath {
 		this.matriz[fila][columna] = valor;
 	}
 	
+	private boolean esCuadrada() {
+		return filas == columnas;
+	}
+
+	
 	public MatrizMath sumar(MatrizMath mat) throws DistDimException{
 		if(this.filas != mat.filas || this.columnas != mat.columnas){
 			throw new DistDimException("Distintas dimensiones");
@@ -92,21 +97,41 @@ public class MatrizMath {
 	}
 
 	public double getDeterminante(){
-		MatrizMath aux = this.clone();
+		if (!this.esCuadrada()) {
+			throw new IllegalArgumentException("Esta Matriz no es Cuadrada. No tiene determinante");
+		}
 		
-        for(int k=0; k<filas-1; k++){
-            for(int i=k+1; i<filas; i++){
-                for(int j=k+1; j<filas; j++){
-                    aux.matriz[i][j]-=aux.matriz[i][k]*aux.matriz[k][j]/aux.matriz[k][k];
-                }
-            }
-        }
-        
-        double determinante = 1.0;
-        for(int i=0; i<filas; i++){
-        	determinante *= aux.matriz[i][i];
-        }
-        return determinante;		
+		int i, j, k, h;
+		int dim = this.filas;
+		double determinante = 1;
+		double escalar;
+		MatrizMath aux = this.clone();
+
+		for (k = 0; k < dim; k++) {
+			if (aux.getCoordMatriz(k, k) == 0) {
+				h = 0;
+				while (h < dim && aux.getCoordMatriz(k, h) == 0)
+					h++;
+				if (h == dim)
+					return 0;
+				i = k;
+				while (aux.getCoordMatriz(i, k) == 0 && i < dim - k)
+					i++;
+				for (j = 0; j < dim; j++)
+					aux.add(k, j, aux.getCoordMatriz(i, j));
+			}
+			escalar = aux.getCoordMatriz(k, k);
+			determinante *= escalar;
+			if (escalar != 0)
+				for (j = 0; j < dim; j++)
+					aux.add(k, j, 1 / escalar);
+			for (i = k + 1; i < dim; i++) {
+				escalar = aux.getCoordMatriz(i, k);
+				for (j = 0; j < dim; j++)
+					aux.add(i, j, escalar * aux.getCoordMatriz(k, j));
+			}
+		}
+		return determinante;	
 	}
 	
 	public MatrizMath getInversa() throws Exception {
@@ -202,8 +227,6 @@ public class MatrizMath {
 		}
 		return true;
 	}
-	
-	
 	
 	@Override
 	public String toString() {

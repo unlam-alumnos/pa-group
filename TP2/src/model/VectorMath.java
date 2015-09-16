@@ -77,6 +77,39 @@ public class VectorMath {
 		return aux;
 	}
 
+	public double normaUno() {
+		double aux = 0;
+		for (int i = 0; i < dim; i++) {
+			if (coord[i] < 0)
+				aux -= coord[i];
+			else
+				aux += coord[i];
+		}
+		return aux;
+	}
+
+	public double normaDos() {
+		double aux = 0;
+		for (int i = 0; i < dim; i++) {
+			aux += Math.pow(coord[i], 2);
+		}
+		aux = Math.sqrt(aux);
+		return aux;
+	}
+
+	public double normaInf() {
+		double aux = 0;
+		double may = 0;
+		for (int i = 0; i < dim; i++) {
+			aux = coord[i];
+			if (aux < 0)
+				aux = aux * (-1);
+			if (aux > may)
+				may = aux;
+		}
+		return may;
+	}
+	
 	public VectorMath clone() {
 		VectorMath aux = new VectorMath(dim);
 
