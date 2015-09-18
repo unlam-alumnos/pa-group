@@ -101,37 +101,24 @@ public class MatrizMath {
 			throw new IllegalArgumentException("Esta Matriz no es Cuadrada. No tiene determinante");
 		}
 		
-		int i, j, k, h;
-		int dim = this.filas;
-		double determinante = 1;
-		double escalar;
 		MatrizMath aux = this.clone();
-
-		for (k = 0; k < dim; k++) {
-			if (aux.getCoordMatriz(k, k) == 0) {
-				h = 0;
-				while (h < dim && aux.getCoordMatriz(k, h) == 0)
-					h++;
-				if (h == dim)
-					return 0;
-				i = k;
-				while (aux.getCoordMatriz(i, k) == 0 && i < dim - k)
-					i++;
-				for (j = 0; j < dim; j++)
-					aux.add(k, j, aux.getCoordMatriz(i, j));
-			}
-			escalar = aux.getCoordMatriz(k, k);
-			determinante *= escalar;
-			if (escalar != 0)
-				for (j = 0; j < dim; j++)
-					aux.add(k, j, 1 / escalar);
-			for (i = k + 1; i < dim; i++) {
-				escalar = aux.getCoordMatriz(i, k);
-				for (j = 0; j < dim; j++)
-					aux.add(i, j, escalar * aux.getCoordMatriz(k, j));
-			}
-		}
-		return determinante;	
+		int n = this.filas;
+        for(int k=0; k<n-1; k++){
+            for(int i=k+1; i<n; i++){
+                for(int j=k+1; j<n; j++){
+                	if (aux.getCoordMatriz(k,k) == 0) {
+                		throw new IllegalArgumentException("La matriz no posee inversa");
+					}
+                	double valorAux = aux.getCoordMatriz(i,j)-aux.getCoordMatriz(i,k)*aux.getCoordMatriz(k,j)/aux.getCoordMatriz(k,k);
+                	aux.add(i, j, valorAux);
+                }
+            }
+        }
+        double deter=1.0;
+        for(int i=0; i<n; i++){
+            deter*=aux.getCoordMatriz(i,i);
+        }
+        return deter;
 	}
 	
 	public MatrizMath getInversa() throws Exception {
