@@ -3,6 +3,7 @@ package model;
 public class Fantasma extends Personaje{
 	
 	private boolean bloqueado;
+	private int victimas;
 	
 	public Fantasma() {
 		super();
@@ -15,6 +16,7 @@ public class Fantasma extends Personaje{
 	
 	public void comer(Personaje pacman){
 		
+		victimas++;
 	}
 	
 	public void comer(Fruta fruta){
