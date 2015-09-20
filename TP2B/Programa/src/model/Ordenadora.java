@@ -8,6 +8,10 @@ public class Ordenadora {
 
 	private int[] vector;
 	
+	public int[] getVector() {
+		return vector;
+	}
+
 	public Ordenadora(int[] vector) {
 		super();
 		this.vector = vector;
@@ -41,7 +45,7 @@ public class Ordenadora {
 	}
 	
 	// ELEMENTALES
-	public void ordernarSeleccion(int[] vector){
+	public void seleccion(){
 		int menor;
 		int posicion;
 		int aux;
@@ -62,7 +66,7 @@ public class Ordenadora {
         }
 	}
 
-	public void ordernarBurbujeo(int[] vector){
+	public void burbujeo(){
 		int aux;
 		for(int i = 0; i < vector.length - 1; i++){
 			for(int j = 0; j < vector.length - i - 1; j++){	
@@ -75,7 +79,7 @@ public class Ordenadora {
 		}
 	}
 	
-	public void ordernarInsercion(int[] vector){
+	public void insercionSinCentinela(){
 		int i;
 		int j;
 		int aux;
@@ -90,16 +94,20 @@ public class Ordenadora {
 	    }
 	}
 	
+	public void insercionConCentinela(){
+		// TODO algoritmo de ordenamiento
+	}
+	
 	// NO ELEMENTALES
-	public void ordernarShell(int[] vector){
+	public void shell(){
 		// TODO algoritmo de ordenamiento
 	}
 	
-	public void ordernarQuickSort(int[] vector){
+	public void quickSort(){
 		// TODO algoritmo de ordenamiento
 	}
 	
-	public void ordernarFusion(int[] vector){
+	public void fusion(){
 		// TODO algoritmo de ordenamiento
 	}
 	
