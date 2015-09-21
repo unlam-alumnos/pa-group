@@ -1,11 +1,11 @@
 package test;
 
-import model.Burbuja;
-import model.Fusion;
-import model.Insersion;
-import model.QuickSort;
-import model.Seleccion;
-import model.Shell;
+import model.elementales.Burbuja;
+import model.elementales.Insersion;
+import model.elementales.Seleccion;
+import model.noelementales.Fusion;
+import model.noelementales.QuickSort;
+import model.noelementales.Shell;
 
 import org.junit.Test;
 
@@ -14,7 +14,7 @@ public class OrdenadoraTest {
     @Test
     public void insersion() {
         Integer[] elements = {1, 2, 3 , 4, -1 , 10, 3, 9};
-        new Insersion().sort(elements);
+        new Insersion().ordenar(elements);
         for (Integer element : elements) {
             System.out.println(element);
         }
@@ -23,7 +23,7 @@ public class OrdenadoraTest {
     @Test
     public void insersionConCentinla() {
         Integer[] elements = {1, 2, 3 , 4, -1 , 10, 3, 9};
-        new Insersion().sortWithSentinal(elements);
+        new Insersion().ordenarConCentinela(elements);
         for (Integer element : elements) {
             System.out.println(element);
         }
@@ -32,7 +32,7 @@ public class OrdenadoraTest {
     @Test
     public void seleccion() {
         Integer[] elements = {1, 2, 3 , 4, -1 , 10, 3, 9};
-        new Seleccion().sort(elements);
+        new Seleccion().ordenar(elements);
         for (Integer element : elements) {
             System.out.println(element);
         }
@@ -41,7 +41,7 @@ public class OrdenadoraTest {
     @Test
     public void burbuja() {
         Integer[] elements = {1, 2, 3 , 4, -1 , 10, 3, 9};
-        new Burbuja().sort(elements);
+        new Burbuja().ordenar(elements);
         for (Integer element : elements) {
             System.out.println(element);
         }
@@ -50,7 +50,7 @@ public class OrdenadoraTest {
     @Test
     public void shell() {
         Integer[] elements = {1, 2, 3 , 4, -1 , 10, 3, 9};
-        new Shell().sort(elements);
+        new Shell().ordenar(elements);
         for (Integer element : elements) {
             System.out.println(element);
         }
@@ -59,7 +59,7 @@ public class OrdenadoraTest {
     @Test
     public void quicksort() {
         Integer[] elements = {1, 2, 3 , 4, -1 , 10, 3, 9};
-        new QuickSort().sort(elements);
+        new QuickSort().ordenar(elements);
         for (Integer element : elements) {
             System.out.println(element);
         }
@@ -68,7 +68,7 @@ public class OrdenadoraTest {
     @Test
     public void fusion() {
         Integer[] elements = {1, 2, 3 , 4, -1 , 10, 3, 9};
-        new Fusion().sort(elements);
+        new Fusion().ordenar(elements);
         for (Integer element : elements) {
             System.out.println(element);
         }

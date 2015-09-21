@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.Calendar;
 
-import model.Burbuja;
-import model.Insersion;
+import model.elementales.Burbuja;
+import model.elementales.Insersion;
 
 
 public class Rendimiento {

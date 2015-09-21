@@ -11,80 +11,71 @@ public abstract class Ordenadora<T> {
     /**
      * Ordena un vector de elementos comparables
      *
-     * @param elements - elementos a ser ordenados
+     * @param elementos - elementos a ser ordenados
      */
-    public abstract void sort(Comparable<T>[] elements);
+    public abstract void ordenar(Comparable<T>[] elementos);
 
     /*
      * Helper methods
      */
 
-    // is v < w ?
-    protected static boolean less(Comparable v, Comparable w) {
-        return v.compareTo(w) < 0;
+    // elemento1 es menor elemento2 ?
+    protected static boolean menor(Comparable elemento1, Comparable elemento2) {
+        return elemento1.compareTo(elemento2) < 0;
     }
 
-    // is v < w ?
-    protected static boolean less(Object v, Object w, Comparator comparator) {
-        return comparator.compare(v, w) < 0;
+    // v es menor w ?
+    protected static boolean menor(Object elemento1, Object elemento2, Comparator comparador) {
+        return comparador.compare(elemento1, elemento2) < 0;
     }
 
-    // exchange a[i] and a[j]
-    protected static void exch(Object[] a, int i, int j) {
-        Object swap = a[i];
-        a[i] = a[j];
-        a[j] = swap;
+    // intercambia a[i] y a[j]
+    protected static void intercambiar(Object[] elementos, int indice1, int indice2) {
+        Object swap = elementos[indice1];
+        elementos[indice1] = elementos[indice2];
+        elementos[indice2] = swap;
     }
 
+/* No es necesaria, con la anterior se atiende cualquier intercambio
     // exchange a[i] and a[j]  (for indirect sort)
     protected static void exch(int[] a, int i, int j) {
         int swap = a[i];
         a[i] = a[j];
         a[j] = swap;
     }
-
- // is the array h-sorted?
-    protected static boolean isHsorted(Comparable[] a, int h) {
-        for (int i = h; i < a.length; i++){
-        	if (less(a[i], a[i-h])){
-            	return false;
-            }
-        }
-        return true;
-    }
-    
-    protected static boolean isSorted(Comparable[] a) {
-        return isSorted(a, 0, a.length - 1);
+*/
+    // esta ordenado ?
+    protected static boolean estaOrdenado(Comparable[] elementos) {
+        return estaOrdenado(elementos, 0, elementos.length - 1);
     }
 
-    // is the array sorted from a[lo] to a[hi]
-    protected static boolean isSorted(Comparable[] a, int lo, int hi) {
-        for (int i = lo+1; i <= hi; i++){
-        	if (less(a[i], a[i-1])){
-            	return false;
-            }
-        }
-        return true;
+    protected static boolean estaOrdenado(Object[] elementos, Comparator comparador) {
+        return estaOrdenado(elementos, 0, elementos.length - 1, comparador);
     }
 
-    protected static boolean isSorted(Object[] a, Comparator comparator) {
-        return isSorted(a, 0, a.length - 1, comparator);
-    }
-
-    // is the array sorted from a[lo] to a[hi]
-    protected static boolean isSorted(Object[] a, int lo, int hi, Comparator comparator) {
-        for (int i = lo + 1; i <= hi; i++){
-            if (less(a[i], a[i-1], comparator)){
+    // Consulta si esta ordenado el array desde array[ini] hasta array[fin]
+    protected static boolean estaOrdenado(Comparable[] elementos, int ini, int fin) {
+        for (int i = ini + 1; i <= fin; i++){
+        	if (menor(elementos[i], elementos[i-1])){
             	return false;
             }
         }
         return true;
     }
 
-    // print array to standard output
-    protected static void show(Comparable[] a) {
-        for (int i = 0; i < a.length; i++) {
-            System.out.println(a[i]);
+    // Consulta si esta ordenado el array desde array[ini] hasta array[fin]
+    protected static boolean estaOrdenado(Object[] elementos, int ini, int fin, Comparator comparador) {
+        for (int i = ini + 1; i <= fin; i++){
+            if (menor(elementos[i], elementos[i-1], comparador)){
+            	return false;
+            }
+        }
+        return true;
+    }
+
+    protected static void mostrar(Comparable[] elementos) {
+        for (int i = 0; i < elementos.length; i++) {
+            System.out.println(elementos[i]);
         }
     }
 }
