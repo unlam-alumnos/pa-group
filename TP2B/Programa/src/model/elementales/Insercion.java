@@ -2,7 +2,7 @@ package model.elementales;
 
 import model.Ordenadora;
 
-public class Insersion extends Ordenadora {
+public class Insercion extends Ordenadora {
 	
     @Override
     public void ordenar(Comparable[] elementos) {

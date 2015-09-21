@@ -1,7 +1,7 @@
 package test;
 
 import model.elementales.Burbuja;
-import model.elementales.Insersion;
+import model.elementales.Insercion;
 import model.elementales.Seleccion;
 import model.noelementales.Fusion;
 import model.noelementales.QuickSort;
@@ -14,7 +14,7 @@ public class OrdenadoraTest {
     @Test
     public void insersion() {
         Integer[] elements = {1, 2, 3 , 4, -1 , 10, 3, 9};
-        new Insersion().ordenar(elements);
+        new Insercion().ordenar(elements);
         for (Integer element : elements) {
             System.out.println(element);
         }
@@ -23,7 +23,7 @@ public class OrdenadoraTest {
     @Test
     public void insersionConCentinla() {
         Integer[] elements = {1, 2, 3 , 4, -1 , 10, 3, 9};
-        new Insersion().ordenarConCentinela(elements);
+        new Insercion().ordenarConCentinela(elements);
         for (Integer element : elements) {
             System.out.println(element);
         }

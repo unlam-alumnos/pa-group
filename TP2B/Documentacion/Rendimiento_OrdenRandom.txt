@@ -1,0 +1,128 @@
+Dimension: 10
+	Burbuja: 15
+	Insercion1: 0
+	Insercion2: 0
+	Seleccion: 0
+	Shell: 0
+	QuickSort: 0
+	Fusion: 0
+Dimension: 100
+	Burbuja: 0
+	Insercion1: 0
+	Insercion2: 0
+	Seleccion: 0
+	Shell: 0
+	QuickSort: 0
+	Fusion: 0
+Dimension: 500
+	Burbuja: 1
+	Insercion1: 0
+	Insercion2: 0
+	Seleccion: 0
+	Shell: 0
+	QuickSort: 0
+	Fusion: 0
+Dimension: 1000
+	Burbuja: 31
+	Insercion1: 0
+	Insercion2: 0
+	Seleccion: 16
+	Shell: 0
+	QuickSort: 0
+	Fusion: 0
+Dimension: 1500
+	Burbuja: 16
+	Insercion1: 0
+	Insercion2: 0
+	Seleccion: 0
+	Shell: 0
+	QuickSort: 0
+	Fusion: 0
+Dimension: 2000
+	Burbuja: 31
+	Insercion1: 0
+	Insercion2: 0
+	Seleccion: 0
+	Shell: 0
+	QuickSort: 0
+	Fusion: 0
+Dimension: 3000
+	Burbuja: 47
+	Insercion1: 0
+	Insercion2: 0
+	Seleccion: 15
+	Shell: 0
+	QuickSort: 0
+	Fusion: 0
+Dimension: 4000
+	Burbuja: 94
+	Insercion1: 0
+	Insercion2: 0
+	Seleccion: 0
+	Shell: 0
+	QuickSort: 0
+	Fusion: 15
+Dimension: 5000
+	Burbuja: 125
+	Insercion1: 0
+	Insercion2: 0
+	Seleccion: 16
+	Shell: 0
+	QuickSort: 0
+	Fusion: 0
+Dimension: 6000
+	Burbuja: 156
+	Insercion1: 0
+	Insercion2: 15
+	Seleccion: 16
+	Shell: 0
+	QuickSort: 0
+	Fusion: 0
+Dimension: 7000
+	Burbuja: 218
+	Insercion1: 0
+	Insercion2: 0
+	Seleccion: 32
+	Shell: 0
+	QuickSort: 0
+	Fusion: 0
+Dimension: 8000
+	Burbuja: 280
+	Insercion1: 0
+	Insercion2: 0
+	Seleccion: 47
+	Shell: 0
+	QuickSort: 0
+	Fusion: 0
+Dimension: 10000
+	Burbuja: 454
+	Insercion1: 0
+	Insercion2: 0
+	Seleccion: 62
+	Shell: 0
+	QuickSort: 0
+	Fusion: 0
+Dimension: 20000
+	Burbuja: 1841
+	Insercion1: 0
+	Insercion2: 0
+	Seleccion: 328
+	Shell: 0
+	QuickSort: 0
+	Fusion: 0
+Dimension: 50000
+	Burbuja: 12472
+	Insercion1: 0
+	Insercion2: 0
+	Seleccion: 2496
+	Shell: 15
+	QuickSort: 0
+	Fusion: 0
+Dimension: 100000
+	Burbuja: 53218
+	Insercion1: 0
+	Insercion2: 0
+	Seleccion: 10660
+	Shell: 0
+	QuickSort: 0
+	Fusion: 31
