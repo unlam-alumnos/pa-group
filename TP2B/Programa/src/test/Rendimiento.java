@@ -4,21 +4,23 @@ import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.Calendar;
 
-import model.Ordenadora;
+import model.Burbuja;
+import model.Insersion;
+
 
 public class Rendimiento {
 
 	public static void main(String[] args) {
-		int[] vector = {8,15,8,4,7,-1,12,0};
-		Ordenadora ordenadora = new Ordenadora(vector);
+		
+		Integer[] elementos = Generador.elementosRandom(100);
+		//System.out.println(Arrays.toString(elementos));
 		
 		Calendar tIni = new GregorianCalendar();
-		ordenadora.seleccion();
+		//new Burbuja().sort(elementos);
 		Calendar tFin = new GregorianCalendar();
 
 		long diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
 		System.out.println(diff);
-		System.out.println(Arrays.toString(ordenadora.getVector()));
-		//sistema.escribirSalida(FILE_NAME+".out");
+		//System.out.println(Arrays.toString(elementos));
 	}
 }
