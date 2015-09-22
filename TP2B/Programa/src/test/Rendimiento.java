@@ -176,7 +176,7 @@ public class Rendimiento {
 		
 		//ordenRandom();
 		//ordenInverso();
-		ordenados();
+		//ordenados();
 	}
 	
 }
