@@ -19,12 +19,9 @@ public class Shell extends Ordenadora{
                 for (int j = i; j >= h && menor(elementos[j], elementos[j-h]); j -= h) {
                     intercambiar(elementos, j, j-h);
                 }
-            }
-            assert estaOrdenado(elementos, h, tam-1); 
-            
+            }            
             h /= 3;
         }
-        assert estaOrdenado(elementos);
 	}
 
 }

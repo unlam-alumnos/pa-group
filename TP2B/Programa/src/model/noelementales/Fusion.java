@@ -2,49 +2,50 @@ package model.noelementales;
 
 import model.Ordenadora;
 
-public class Fusion extends Ordenadora{
+public class Fusion extends Ordenadora {
 
 	@Override
-	public void ordenar(Comparable[] elementos){
+	public void ordenar(Comparable[] elementos) {
 		Comparable[] tmpElementos = new Comparable[elementos.length];
-		fusion(elementos, tmpElementos, 0, elementos.length - 1 );
+		dividir(elementos, tmpElementos, 0, elementos.length - 1);
 	}
-	
-	public void fusion(Comparable[] elements, Comparable[] tmpElements, int left, int right) {
-		if (left < right) {
-			int center = (left + right) / 2;
-			fusion( elements, tmpElements, left, center );
-			fusion( elements, tmpElements, center + 1, right );
-			fusionar( elements, tmpElements, left, center + 1, right );
+
+	public void dividir(Comparable[] elementos, Comparable[] tmpElementos,
+			int ini, int fin) {
+		if (ini < fin) {
+			int centro = (ini + fin) / 2;
+			dividir(elementos, tmpElementos, ini, centro);
+			dividir(elementos, tmpElementos, centro + 1, fin);
+			fusionar(elementos, tmpElementos, ini, centro + 1, fin);
 		}
 	}
-	
-	public void fusionar( Comparable[] elementos, Comparable[] tmpElementos, int izquierda, int derecha, int fin ) {
-		int ini = derecha - 1;
+
+	public void fusionar(Comparable[] elementos, Comparable[] tmpElementos, int izquierda, int derecha, int fin) {
+		int centro = derecha - 1;
 		int tmpPos = izquierda;
 		int tam = fin - izquierda + 1;
-		
-		// Main loop
-		while( izquierda <= ini && derecha <= fin ){
-			if( elementos[izquierda].compareTo(elementos[derecha]) <= 0 ){
-				tmpElementos[tmpPos++] = elementos[izquierda++];
-			}else { 
-				tmpElementos[tmpPos++] = elementos[derecha++];
+
+		while (izquierda <= centro && derecha <= fin) {
+			if (elementos[izquierda].compareTo(elementos[derecha]) <= 0) {
+				tmpElementos[tmpPos] = elementos[izquierda];
+			} else {
+				tmpElementos[tmpPos] = elementos[derecha];
 			}
+			tmpPos++;
+			izquierda++;
+			derecha++;
 		}
-		
-		while( izquierda <= ini ) {
+
+		while (izquierda <= centro) {
 			tmpElementos[tmpPos++] = elementos[izquierda++];
 		}
-		
-		while( derecha <= fin ) {
+
+		while (derecha <= fin) {
 			tmpElementos[tmpPos++] = elementos[derecha++];
 		}
 		
-		// Copy tmpArray back
-	    for( int i = 0; i < tam; i++, fin-- ){
-	    	elementos[fin] = tmpElementos[fin];
-	    }
-		
+		for (int i = 0; i < tam; i++, fin--) {
+			elementos[fin] = tmpElementos[fin];
+		}
 	}
 }

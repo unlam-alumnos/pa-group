@@ -13,8 +13,6 @@ public class Seleccion extends Ordenadora {
                 if (menor(elementos[j], elementos[min])) min = j;
             }
             intercambiar(elementos, i, min);
-            assert estaOrdenado(elementos, 0, i);
         }
-        assert estaOrdenado(elementos);
     }
 }

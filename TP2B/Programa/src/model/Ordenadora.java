@@ -36,14 +36,6 @@ public abstract class Ordenadora<T> {
         elementos[indice2] = swap;
     }
 
-/* No es necesaria, con la anterior se atiende cualquier intercambio
-    // exchange a[i] and a[j]  (for indirect sort)
-    protected static void exch(int[] a, int i, int j) {
-        int swap = a[i];
-        a[i] = a[j];
-        a[j] = swap;
-    }
-*/
     // esta ordenado ?
     protected static boolean estaOrdenado(Comparable[] elementos) {
         return estaOrdenado(elementos, 0, elementos.length - 1);

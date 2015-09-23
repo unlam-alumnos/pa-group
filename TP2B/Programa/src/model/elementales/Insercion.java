@@ -11,9 +11,7 @@ public class Insercion extends Ordenadora {
             for (int j = i; j > 0 && elementos[j].compareTo(elementos[j - 1]) < 0; j--) {
                 intercambiar(elementos, j, j - 1);
             }
-            assert estaOrdenado(elementos, 0, i);
         }
-        assert estaOrdenado(elementos);
     }
     
     public void ordenarConCentinela(Comparable[] elementos){
@@ -28,6 +26,5 @@ public class Insercion extends Ordenadora {
     			intercambiar(elementos, j, j - 1);
     		}
     	}
-        assert estaOrdenado(elementos);
     }
 }

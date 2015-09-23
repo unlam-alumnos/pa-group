@@ -7,54 +7,45 @@ public class QuickSort extends Ordenadora {
     @Override
     public void ordenar(Comparable[] elementos) {
         ordenar(elementos, 0, elementos.length - 1);
-        assert estaOrdenado(elementos);
     }
 
-    // quicksort the subarray from elements[ini] to elements[fin]
     private static void ordenar(Comparable[] elementos, int ini, int fin) {
-        if (ini <= fin) {
+        if (fin <= ini) {
             return;
         }
-        int j = particion(elementos, ini, fin);
-        ordenar(elementos, ini, j - 1);
-        ordenar(elementos, j + 1, fin);
-        assert estaOrdenado(elementos, ini, fin);
+        int pivote = particion(elementos, ini, fin);
+        ordenar(elementos, ini, pivote - 1);
+        ordenar(elementos, pivote + 1, fin);
     }
 
-    // partition the subarray elements[ini..fin] so that elements[ini..j-1] <= elements[j] <= elements[j+1..fin]
-    // and return the index j.
     private static int particion(Comparable[] elementos, int ini, int fin) {
-        int i = ini;
-        int j = fin + 1;
-        Comparable v = elementos[ini];
+        int indice = ini;
+        int pivote = fin + 1;
+        Comparable elementoInicial = elementos[ini];
+       
         while (true) {
 
-            // find item on ini to swap
-            while (menor(elementos[++i], v)) {
-                if (i == fin) {
+            while (menor(elementos[++indice], elementoInicial)) {
+                if (indice == fin) {
                     break;
                 }
             }
 
-            // find item on fin to swap
-            while (menor(v, elementos[--j])) {
-                if (j == ini) {
-                    break;      // redundant since elements[ini] acts as sentinel
+            while (menor(elementoInicial, elementos[--pivote])) {
+                if (pivote == ini) {
+                    break;
                 }
             }
 
-            // check if pointers cross
-            if (i >= j) {
+            if (indice >= pivote) {
                 break;
             }
 
-            intercambiar(elementos, i, j);
+            intercambiar(elementos, indice, pivote);
         }
 
-        // put partitioning item v at elements[j]
-        intercambiar(elementos, ini, j);
+        intercambiar(elementos, ini, pivote);
 
-        // now, elements[ini .. j-1] <= elements[j] <= elements[j+1 .. fin]
-        return j;
+        return pivote;
     }
 }
