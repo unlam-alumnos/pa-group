@@ -1,0 +1,112 @@
+Dimension: 10
+	Burbuja: 1.0
+	Seleccion: 0.0
+	Insercion1: 1.0
+	Insercion2: 0.0
+	Shell: 1.0
+	QuickSort: 0.0
+	Fusion: 1.0
+Dimension: 100
+	Burbuja: 1.0
+	Seleccion: 0.0
+	Insercion1: 0.0
+	Insercion2: 0.0
+	Shell: 0.0
+	QuickSort: 0.0
+	Fusion: 0.0
+Dimension: 1000
+	Burbuja: 10.0
+	Seleccion: 11.0
+	Insercion1: 0.0
+	Insercion2: 0.0
+	Shell: 1.0
+	QuickSort: 11.0
+	Fusion: 2.0
+Dimension: 2000
+	Burbuja: 5.0
+	Seleccion: 74.0
+	Insercion1: 0.0
+	Insercion2: 1.0
+	Shell: 1.0
+	QuickSort: 11.0
+	Fusion: 3.0
+Dimension: 3000
+	Burbuja: 13.0
+	Seleccion: 5.0
+	Insercion1: 0.0
+	Insercion2: 1.0
+	Shell: 2.0
+	QuickSort: 6.0
+	Fusion: 6.0
+Dimension: 4000
+	Burbuja: 20.0
+	Seleccion: 13.0
+	Insercion1: 1.0
+	Insercion2: 1.0
+	Shell: 2.0
+	QuickSort: 17.0
+	Fusion: 1.0
+Dimension: 5000
+	Burbuja: 31.0
+	Seleccion: 13.0
+	Insercion1: 0.0
+	Insercion2: 1.0
+	Shell: 1.0
+	QuickSort: 20.0
+	Fusion: 2.0
+Dimension: 6000
+	Burbuja: 30.0
+	Seleccion: 19.0
+	Insercion1: 0.0
+	Insercion2: 1.0
+	Shell: 1.0
+	QuickSort: 27.0
+	Fusion: 0.0
+Dimension: 7000
+	Burbuja: 41.0
+	Seleccion: 26.0
+	Insercion1: 0.0
+	Insercion2: 1.0
+	Shell: 1.0
+	QuickSort: 37.0
+	Fusion: 0.0
+Dimension: 8000
+	Burbuja: 55.0
+	Seleccion: 33.0
+	Insercion1: 1.0
+	Insercion2: 1.0
+	Shell: 1.0
+	QuickSort: 45.0
+	Fusion: 1.0
+Dimension: 10000
+	Burbuja: 81.0
+	Seleccion: 52.0
+	Insercion1: 1.0
+	Insercion2: 0.0
+	Shell: 0.0
+	QuickSort: 72.0
+	Fusion: 1.0
+Dimension: 20000
+	Burbuja: 328.0
+	Seleccion: 215.0
+	Insercion1: 1.0
+	Insercion2: 1.0
+	Shell: 1.0
+	QuickSort: 282.0
+	Fusion: 2.0
+Dimension: 50000
+	Burbuja: 2036.0
+	Seleccion: 1395.0
+	Insercion1: 1.0
+	Insercion2: 0.0
+	Shell: 1.0
+	QuickSort: 1790.0
+	Fusion: 6.0
+Dimension: 100000
+	Burbuja: 8185.0
+	Seleccion: 5744.0
+	Insercion1: 1.0
+	Insercion2: 0.0
+	Shell: 2.0
+	QuickSort: 7316.0
+	Fusion: 11.0

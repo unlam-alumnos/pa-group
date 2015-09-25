@@ -102,9 +102,9 @@ public class Rendimiento {
 			tFusion = fusion(elementos);
 			System.out.println("Dimension: " + dimensiones[i]);
 			System.out.println("\tBurbuja: " + tBurbuja);
+			System.out.println("\tSeleccion: " + tSeleccion);
 			System.out.println("\tInsercion1: " + tInsercion1);
 			System.out.println("\tInsercion2: " + tInsercion2);
-			System.out.println("\tSeleccion: " + tSeleccion);
 			System.out.println("\tShell: " + tShell);
 			System.out.println("\tQuickSort: " + tQuickSort);
 			System.out.println("\tFusion: " + tFusion);
@@ -133,9 +133,9 @@ public class Rendimiento {
 			tFusion = fusion(elementos);
 			System.out.println("Dimension: " + dimensiones[i]);
 			System.out.println("\tBurbuja: " + tBurbuja);
+			System.out.println("\tSeleccion: " + tSeleccion);
 			System.out.println("\tInsercion1: " + tInsercion1);
 			System.out.println("\tInsercion2: " + tInsercion2);
-			System.out.println("\tSeleccion: " + tSeleccion);
 			System.out.println("\tShell: " + tShell);
 			System.out.println("\tQuickSort: " + tQuickSort);
 			System.out.println("\tFusion: " + tFusion);
@@ -164,9 +164,9 @@ public class Rendimiento {
 			tFusion = fusion(elementos);
 			System.out.println("Dimension: " + dimensiones[i]);
 			System.out.println("\tBurbuja: " + tBurbuja);
+			System.out.println("\tSeleccion: " + tSeleccion);
 			System.out.println("\tInsercion1: " + tInsercion1);
 			System.out.println("\tInsercion2: " + tInsercion2);
-			System.out.println("\tSeleccion: " + tSeleccion);
 			System.out.println("\tShell: " + tShell);
 			System.out.println("\tQuickSort: " + tQuickSort);
 			System.out.println("\tFusion: " + tFusion);

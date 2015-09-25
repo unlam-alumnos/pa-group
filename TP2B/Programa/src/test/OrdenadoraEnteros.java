@@ -12,7 +12,7 @@ import model.noelementales.Shell;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class OrdenadoraInteger {
+public class OrdenadoraEnteros {
 	
 	private final static Integer[] arrayIn = {1, 2, 3 , 4, -1 , 10, 3, 9};
 	private final static Integer[] arraySorted = {-1, 1, 2, 3, 3, 4, 9, 10};

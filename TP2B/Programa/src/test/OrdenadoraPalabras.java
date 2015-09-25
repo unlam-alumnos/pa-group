@@ -12,7 +12,7 @@ import model.noelementales.Shell;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class OrdenadoraString {
+public class OrdenadoraPalabras {
 	
 	private final static String[] arrayIn = {"Hola","Chau","Ala","Aca","Abap","Zorro","Banco"};
 	private final static String[] arraySorted = {"Abap","Aca","Ala","Banco","Chau","Hola","Zorro"};
