@@ -10,6 +10,10 @@ public class Fantasma extends Personaje{
 		this.bloqueado = false;
 	}
 
+	public void dibujarse(){
+		
+	}
+	
 	public void moverse(){
 		
 	}

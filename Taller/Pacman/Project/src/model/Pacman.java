@@ -2,6 +2,10 @@ package model;
 
 public class Pacman extends Personaje{
 	
+	public void dibujarse(){
+		
+	}
+	
 	public void moverse(){
 		
 	}
