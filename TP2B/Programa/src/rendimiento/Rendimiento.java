@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.Calendar;
 
-import model.Generador;
+import model.GeneradorInteger;
 import model.elementales.Burbuja;
 import model.elementales.Insercion;
 import model.elementales.Seleccion;
@@ -17,82 +17,82 @@ public class Rendimiento {
 	
 	private static int[] dimensiones = {10,100,1000,2000,3000,4000,5000,6000,7000,8000,10000,20000,50000,100000};
 	
-	private static long burbuja(Comparable[] elementos){
+	private static double burbuja(Comparable[] elementos){
 		
 		Calendar tIni = new GregorianCalendar();
 		new Burbuja().ordenar(elementos);
 		Calendar tFin = new GregorianCalendar();
-		long diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
+		double diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
 		return diff;
 	}
 
-	private static long insercion(Comparable[] elementos){
+	private static double insercion(Comparable[] elementos){
 		
 		Calendar tIni = new GregorianCalendar();
 		new Insercion().ordenar(elementos);
 		Calendar tFin = new GregorianCalendar();
-		long diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
+		double diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
 		return diff;
 	}
 
-	private static long insercionConCentinela(Comparable[] elementos){
+	private static double insercionConCentinela(Comparable[] elementos){
 		
 		Calendar tIni = new GregorianCalendar();
 		new Insercion().ordenarConCentinela(elementos);
 		Calendar tFin = new GregorianCalendar();
-		long diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
+		double diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
 		return diff;
 	}
 
-	private static long seleccion(Comparable[] elementos){
+	private static double seleccion(Comparable[] elementos){
 		
 		Calendar tIni = new GregorianCalendar();
 		new Seleccion().ordenar(elementos);
 		Calendar tFin = new GregorianCalendar();
-		long diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
+		double diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
 		return diff;
 	}
 	
-	private static long shell(Comparable[] elementos){
+	private static double shell(Comparable[] elementos){
 		
 		Calendar tIni = new GregorianCalendar();
 		new Shell().ordenar(elementos);
 		Calendar tFin = new GregorianCalendar();
-		long diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
+		double diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
 		return diff;
 	}
 
-	private static long quickSort(Comparable[] elementos){
+	private static double quickSort(Comparable[] elementos){
 		
 		Calendar tIni = new GregorianCalendar();
 		new QuickSort().ordenar(elementos);
 		Calendar tFin = new GregorianCalendar();
-		long diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
+		double diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
 		return diff;
 	}
 
-	private static long fusion(Comparable[] elementos){
+	private static double fusion(Comparable[] elementos){
 		
 		Calendar tIni = new GregorianCalendar();
 		new Fusion().ordenar(elementos);
 		Calendar tFin = new GregorianCalendar();
-		long diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
+		double diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
 		return diff;
 	}
 	
 	private static void ordenados(){
 		Integer[] elementos;
 		
-		long tBurbuja = 0;
-		long tInsercion1 = 0;
-		long tInsercion2 = 0;
-		long tSeleccion = 0;
-		long tShell = 0;
-		long tQuickSort = 0;
-		long tFusion = 0;
+		double tBurbuja = 0;
+		double tInsercion1 = 0;
+		double tInsercion2 = 0;
+		double tSeleccion = 0;
+		double tShell = 0;
+		double tQuickSort = 0;
+		double tFusion = 0;
 		
 		for (int i = 0; i < dimensiones.length; i++) {
-			elementos = Generador.elementosOrdenados(dimensiones[i]);
+			elementos = GeneradorInteger.elementosOrdenados(dimensiones[i]);
 			tBurbuja = burbuja(elementos);
 			tInsercion1 = insercion(elementos);
 			tInsercion2 = insercionConCentinela(elementos);
@@ -114,16 +114,16 @@ public class Rendimiento {
 	private static void ordenInverso(){
 		Integer[] elementos;
 		
-		long tBurbuja = 0;
-		long tInsercion1 = 0;
-		long tInsercion2 = 0;
-		long tSeleccion = 0;
-		long tShell = 0;
-		long tQuickSort = 0;
-		long tFusion = 0;
+		double tBurbuja = 0;
+		double tInsercion1 = 0;
+		double tInsercion2 = 0;
+		double tSeleccion = 0;
+		double tShell = 0;
+		double tQuickSort = 0;
+		double tFusion = 0;
 		
 		for (int i = 0; i < dimensiones.length; i++) {
-			elementos = Generador.elementosOrdenInverso(dimensiones[i]);
+			elementos = GeneradorInteger.elementosOrdenInverso(dimensiones[i]);
 			tBurbuja = burbuja(elementos);
 			tInsercion1 = insercion(elementos);
 			tInsercion2 = insercionConCentinela(elementos);
@@ -145,16 +145,16 @@ public class Rendimiento {
 	private static void ordenRandom(){
 		Integer[] elementos;
 		
-		long tBurbuja = 0;
-		long tInsercion1 = 0;
-		long tInsercion2 = 0;
-		long tSeleccion = 0;
-		long tShell = 0;
-		long tQuickSort = 0;
-		long tFusion = 0;
+		double tBurbuja = 0;
+		double tInsercion1 = 0;
+		double tInsercion2 = 0;
+		double tSeleccion = 0;
+		double tShell = 0;
+		double tQuickSort = 0;
+		double tFusion = 0;
 		
 		for (int i = 0; i < dimensiones.length; i++) {
-			elementos = Generador.elementosRandom(dimensiones[i]);
+			elementos = GeneradorInteger.elementosRandom(dimensiones[i]);
 			tBurbuja = burbuja(elementos);
 			tInsercion1 = insercion(elementos);
 			tInsercion2 = insercionConCentinela(elementos);

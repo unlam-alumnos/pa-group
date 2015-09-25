@@ -1,6 +1,6 @@
 package model;
 
-public class Generador {
+public class GeneradorInteger {
 	
 	static public Integer[] elementosOrdenados(int dimension){
 		

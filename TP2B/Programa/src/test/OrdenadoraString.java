@@ -14,46 +14,47 @@ import org.junit.Test;
 
 public class OrdenadoraString {
 	
+	private final static String[] arrayIn = {"Hola","Chau","Ala","Aca","Abap","Zorro","Banco"};
 	private final static String[] arraySorted = {"Abap","Aca","Ala","Banco","Chau","Hola","Zorro"};
 	
     @Test
     public void insersion() {
-        String[] elements = {"Hola","Chau","Ala","Aca","Abap","Zorro","Banco"};
+        String[] elements = arrayIn;
         new Insercion().ordenar(elements);
         Assert.assertArrayEquals(arraySorted, elements);
     }
 
     @Test
     public void insersionConCentinla() {
-        String[] elements = {"Hola","Chau","Ala","Aca","Abap","Zorro","Banco"};
+        String[] elements = arrayIn;
         new Insercion().ordenarConCentinela(elements);
         Assert.assertArrayEquals(arraySorted, elements);
     }
     
     @Test
     public void seleccion() {
-        String[] elements = {"Hola","Chau","Ala","Aca","Abap","Zorro","Banco"};
+        String[] elements = arrayIn;
         new Seleccion().ordenar(elements);
         Assert.assertArrayEquals(arraySorted, elements);
     }
 
     @Test
     public void burbuja() {
-        String[] elements = {"Hola","Chau","Ala","Aca","Abap","Zorro","Banco"};
+        String[] elements = arrayIn;
         new Burbuja().ordenar(elements);
         Assert.assertArrayEquals(arraySorted, elements);
     }
     
     @Test
     public void shell() {
-        String[] elements = {"Hola","Chau","Ala","Aca","Abap","Zorro","Banco"};
+        String[] elements = arrayIn;
         new Shell().ordenar(elements);
         Assert.assertArrayEquals(arraySorted, elements);
     }
 
     @Test
     public void quicksort() {
-        String[] elements = {"Hola","Chau","Ala","Aca","Abap","Zorro","Banco"};
+        String[] elements = arrayIn;
         new QuickSort().ordenar(elements);
         Assert.assertArrayEquals(arraySorted, elements);
         
@@ -61,7 +62,7 @@ public class OrdenadoraString {
 
     @Test
     public void fusion() {
-        String[] elements = {"Hola","Chau","Ala","Aca","Abap","Zorro","Banco"};
+        String[] elements = arrayIn;
         new Fusion().ordenar(elements);
         Arrays.toString(elements);
         Assert.assertArrayEquals(arraySorted, elements);
