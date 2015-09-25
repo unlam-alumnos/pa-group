@@ -1,5 +1,7 @@
 package model.noelementales;
 
+import java.util.Arrays;
+
 import model.Ordenadora;
 
 public class QuickSort extends Ordenadora {
@@ -10,12 +12,11 @@ public class QuickSort extends Ordenadora {
     }
 
     private static void ordenar(Comparable[] elementos, int ini, int fin) {
-        if (fin <= ini) {
-            return;
+        if (fin > ini) {
+        	int pivote = particion(elementos, ini, fin);
+            ordenar(elementos, ini, pivote - 1);
+            ordenar(elementos, pivote + 1, fin);
         }
-        int pivote = particion(elementos, ini, fin);
-        ordenar(elementos, ini, pivote - 1);
-        ordenar(elementos, pivote + 1, fin);
     }
 
     private static int particion(Comparable[] elementos, int ini, int fin) {

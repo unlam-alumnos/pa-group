@@ -1,9 +1,10 @@
-package test;
+package rendimiento;
 
 import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.Calendar;
 
+import model.Generador;
 import model.elementales.Burbuja;
 import model.elementales.Insercion;
 import model.elementales.Seleccion;
@@ -14,7 +15,7 @@ import model.noelementales.Shell;
 
 public class Rendimiento {
 	
-	private static int[] dimensiones = {10,100,500,1000,1500,2000,3000,4000,5000,6000,7000,8000,10000,20000,50000,100000};
+	private static int[] dimensiones = {10,100,1000,2000,3000,4000,5000,6000,7000,8000,10000,20000,50000,100000};
 	
 	private static long burbuja(Comparable[] elementos){
 		

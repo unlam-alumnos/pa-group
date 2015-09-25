@@ -28,12 +28,12 @@ public class Fusion extends Ordenadora {
 		while (izquierda <= centro && derecha <= fin) {
 			if (elementos[izquierda].compareTo(elementos[derecha]) <= 0) {
 				tmpElementos[tmpPos] = elementos[izquierda];
+				izquierda++;
 			} else {
 				tmpElementos[tmpPos] = elementos[derecha];
+				derecha++;
 			}
 			tmpPos++;
-			izquierda++;
-			derecha++;
 		}
 
 		while (izquierda <= centro) {
