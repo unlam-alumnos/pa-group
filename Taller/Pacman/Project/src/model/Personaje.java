@@ -1,8 +1,13 @@
 package model;
 
+import javax.swing.ImageIcon;
+
 public abstract class Personaje {
 
 	protected int velocidad;
+	protected int posicionX;
+	protected int posicionY;
+	protected ImageIcon imagen;
 	
 	protected void dibujarse(){}
 	

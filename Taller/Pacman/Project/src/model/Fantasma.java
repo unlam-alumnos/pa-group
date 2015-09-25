@@ -23,7 +23,7 @@ public class Fantasma extends Personaje{
 		victimas++;
 	}
 	
-	public void comer(Fruta fruta){
+	public void comer(Casillero frutaEspecial){
 		
 	}
 	

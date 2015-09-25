@@ -521,20 +521,20 @@ public class tablero extends JPanel implements ActionListener {
 
     private void loadImages() {
 
-        ghost = new ImageIcon(getClass().getResource("../images/ghost.gif")).getImage();
-        pacman1 = new ImageIcon(getClass().getResource("../images/pacman.gif")).getImage();
-        pacman2up = new ImageIcon(getClass().getResource("../images/up1.gif")).getImage();
-        pacman3up = new ImageIcon(getClass().getResource("../images/up2.gif")).getImage();
-        pacman4up = new ImageIcon(getClass().getResource("../images/up3.gif")).getImage();
-        pacman2down = new ImageIcon(getClass().getResource("../images/down1.gif")).getImage();
-        pacman3down = new ImageIcon(getClass().getResource("../images/down2.gif")).getImage();
-        pacman4down = new ImageIcon(getClass().getResource("../images/down3.gif")).getImage();
-        pacman2left = new ImageIcon(getClass().getResource("../images/left1.gif")).getImage();
-        pacman3left = new ImageIcon(getClass().getResource("../images/left2.gif")).getImage();
-        pacman4left = new ImageIcon(getClass().getResource("../images/left3.gif")).getImage();
-        pacman2right = new ImageIcon(getClass().getResource("../images/right1.gif")).getImage();
-        pacman3right = new ImageIcon(getClass().getResource("../images/right2.gif")).getImage();
-        pacman4right = new ImageIcon(getClass().getResource("../images/right3.gif")).getImage();
+        ghost = new ImageIcon(getClass().getResource("images/ghost.gif")).getImage();
+        pacman1 = new ImageIcon(getClass().getResource("images/pacman.gif")).getImage();
+        pacman2up = new ImageIcon(getClass().getResource("images/up1.gif")).getImage();
+        pacman3up = new ImageIcon(getClass().getResource("images/up2.gif")).getImage();
+        pacman4up = new ImageIcon(getClass().getResource("images/up3.gif")).getImage();
+        pacman2down = new ImageIcon(getClass().getResource("images/down1.gif")).getImage();
+        pacman3down = new ImageIcon(getClass().getResource("images/down2.gif")).getImage();
+        pacman4down = new ImageIcon(getClass().getResource("images/down3.gif")).getImage();
+        pacman2left = new ImageIcon(getClass().getResource("images/left1.gif")).getImage();
+        pacman3left = new ImageIcon(getClass().getResource("images/left2.gif")).getImage();
+        pacman4left = new ImageIcon(getClass().getResource("images/left3.gif")).getImage();
+        pacman2right = new ImageIcon(getClass().getResource("images/right1.gif")).getImage();
+        pacman3right = new ImageIcon(getClass().getResource("images/right2.gif")).getImage();
+        pacman4right = new ImageIcon(getClass().getResource("images/right3.gif")).getImage();
 
     }
 
