@@ -92,14 +92,21 @@ public class Rendimiento {
 		double tFusion = 0;
 		
 		for (int i = 0; i < dimensiones.length; i++) {
-			elementos = GeneradorInteger.elementosOrdenados(dimensiones[i]);
-			tBurbuja = burbuja(elementos);
-			tInsercion1 = insercion(elementos);
-			tInsercion2 = insercionConCentinela(elementos);
-			tSeleccion = seleccion(elementos);
-			tShell = shell(elementos);
-			tQuickSort = quickSort(elementos);
-			tFusion = fusion(elementos);
+			Integer[] elementos1 = GeneradorInteger.elementosOrdenados(dimensiones[i]);
+			Integer[] elementos2 = elementos1.clone();
+			Integer[] elementos3 = elementos1.clone();
+			Integer[] elementos4 = elementos1.clone();
+			Integer[] elementos5 = elementos1.clone();
+			Integer[] elementos6 = elementos1.clone();
+			Integer[] elementos7 = elementos1.clone();
+			
+			tBurbuja = burbuja(elementos1);
+			tInsercion1 = insercion(elementos2);
+			tInsercion2 = insercionConCentinela(elementos3);
+			tSeleccion = seleccion(elementos4);
+			tShell = shell(elementos5);
+			tQuickSort = quickSort(elementos6);
+			tFusion = fusion(elementos7);
 			System.out.println("Dimension: " + dimensiones[i]);
 			System.out.println("\tBurbuja: " + tBurbuja);
 			System.out.println("\tSeleccion: " + tSeleccion);
@@ -123,14 +130,21 @@ public class Rendimiento {
 		double tFusion = 0;
 		
 		for (int i = 0; i < dimensiones.length; i++) {
-			elementos = GeneradorInteger.elementosOrdenInverso(dimensiones[i]);
-			tBurbuja = burbuja(elementos);
-			tInsercion1 = insercion(elementos);
-			tInsercion2 = insercionConCentinela(elementos);
-			tSeleccion = seleccion(elementos);
-			tShell = shell(elementos);
-			tQuickSort = quickSort(elementos);
-			tFusion = fusion(elementos);
+			Integer[] elementos1 = GeneradorInteger.elementosOrdenInverso(dimensiones[i]);
+			Integer[] elementos2 = elementos1.clone();
+			Integer[] elementos3 = elementos1.clone();
+			Integer[] elementos4 = elementos1.clone();
+			Integer[] elementos5 = elementos1.clone();
+			Integer[] elementos6 = elementos1.clone();
+			Integer[] elementos7 = elementos1.clone();
+			
+			tBurbuja = burbuja(elementos1);
+			tInsercion1 = insercion(elementos2);
+			tInsercion2 = insercionConCentinela(elementos3);
+			tSeleccion = seleccion(elementos4);
+			tShell = shell(elementos5);
+			tQuickSort = quickSort(elementos6);
+			tFusion = fusion(elementos7);
 			System.out.println("Dimension: " + dimensiones[i]);
 			System.out.println("\tBurbuja: " + tBurbuja);
 			System.out.println("\tSeleccion: " + tSeleccion);
@@ -143,8 +157,6 @@ public class Rendimiento {
 	}
 
 	private static void ordenRandom(){
-		Integer[] elementos;
-		
 		double tBurbuja = 0;
 		double tInsercion1 = 0;
 		double tInsercion2 = 0;
@@ -154,14 +166,21 @@ public class Rendimiento {
 		double tFusion = 0;
 		
 		for (int i = 0; i < dimensiones.length; i++) {
-			elementos = GeneradorInteger.elementosRandom(dimensiones[i]);
-			tBurbuja = burbuja(elementos);
-			tInsercion1 = insercion(elementos);
-			tInsercion2 = insercionConCentinela(elementos);
-			tSeleccion = seleccion(elementos);
-			tShell = shell(elementos);
-			tQuickSort = quickSort(elementos);
-			tFusion = fusion(elementos);
+			Integer[] elementos1 = GeneradorInteger.elementosRandom(dimensiones[i]);
+			Integer[] elementos2 = elementos1.clone();
+			Integer[] elementos3 = elementos1.clone();
+			Integer[] elementos4 = elementos1.clone();
+			Integer[] elementos5 = elementos1.clone();
+			Integer[] elementos6 = elementos1.clone();
+			Integer[] elementos7 = elementos1.clone();
+			
+			tBurbuja = burbuja(elementos1);
+			tInsercion1 = insercion(elementos2);
+			tInsercion2 = insercionConCentinela(elementos3);
+			tSeleccion = seleccion(elementos4);
+			tShell = shell(elementos5);
+			tQuickSort = quickSort(elementos6);
+			tFusion = fusion(elementos7);
 			System.out.println("Dimension: " + dimensiones[i]);
 			System.out.println("\tBurbuja: " + tBurbuja);
 			System.out.println("\tSeleccion: " + tSeleccion);

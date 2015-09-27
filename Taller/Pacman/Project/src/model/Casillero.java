@@ -8,6 +8,10 @@ public class Casillero {
 		super();
 		this.tipo = tipo;
 	}
+
+	public void setTipo(short tipo) {
+		this.tipo = tipo;
+	}
 	
 	
 }

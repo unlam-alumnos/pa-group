@@ -9,6 +9,8 @@ public abstract class Personaje {
 	protected int posicionY;
 	protected ImageIcon imagen;
 	
+	protected void setImagen(){}
+	
 	protected void dibujarse(){}
 	
 	protected void moverse(){}

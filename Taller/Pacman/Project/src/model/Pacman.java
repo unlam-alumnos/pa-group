@@ -8,10 +8,6 @@ public class Pacman extends Personaje{
 		
 	}
 	
-	public void setImagen(){
-		
-	}
-	
 	public void moverse(){
 		
 	}
