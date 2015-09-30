@@ -7,40 +7,51 @@ import java.util.GregorianCalendar;
 import model.GeneradorInteger;
 import model.elementales.Burbuja;
 import model.elementales.Insercion;
+import model.elementales.Seleccion;
 import model.noelementales.Fusion;
 import model.noelementales.QuickSort;
 import model.noelementales.Shell;
 
 public class TestManual {
 
-	private static Integer[] arrayIn = GeneradorInteger.elementosRandom(1000000);
+	private static Integer[] arrayIn = GeneradorInteger.elementosRandom(50000);
 	
 	public static void main(String[] args) {
 
-        Integer[] elementos1 = arrayIn;
-        Integer[] elementos2 = arrayIn;
-        Integer[] elementos3 = arrayIn;        
+        Integer[] elementos1 = Arrays.copyOf(arrayIn,arrayIn.length);
+        Integer[] elementos2 = Arrays.copyOf(arrayIn,arrayIn.length);
+        Integer[] elementos3 = Arrays.copyOf(arrayIn,arrayIn.length);  
+        Integer[] elementos4 = Arrays.copyOf(arrayIn,arrayIn.length);       
         Calendar tIni;
         Calendar tFin;
         double diff;
-        
+
         tIni = new GregorianCalendar();
-		new Shell().ordenar(elementos1);
+		new Burbuja().ordenar(elementos1);
 		tFin = new GregorianCalendar();
 		diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
-		System.out.println("SHELL:" + diff);
+		System.out.println("Burbuja:" + diff);
 
 		tIni = new GregorianCalendar();
-		new Fusion().ordenar(elementos3);
+		new Seleccion().ordenar(elementos2);
 		tFin = new GregorianCalendar();
 		diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
-		System.out.println("Fusion:" + diff);
-		
+		System.out.println("Seleccion:" + diff);
+
 		tIni = new GregorianCalendar();
-		new QuickSort().ordenar(elementos2);
+		new Insercion().ordenar(elementos3);
 		tFin = new GregorianCalendar();
 		diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
-		System.out.println("QuickSort:" + diff);
+		System.out.println("Insercion:" + diff);
+		
+        
+        tIni = new GregorianCalendar();
+		new Insercion().ordenarConCentinela(elementos4);
+		tFin = new GregorianCalendar();
+		diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
+		System.out.println("InsercionConCentinela:" + diff);
+		
+		
 	}
 
 }
