@@ -69,7 +69,7 @@ public class OperacionesTest {
 
 	@Test
 	public void logaritmo(){
-		Logaritmo logaritmo = new Logaritmo(Math.E,1);
+		Logaritmo logaritmo = new Logaritmo(1);
 		Assert.assertEquals(0, logaritmo.resolver(), -10E10);
 	}
 }

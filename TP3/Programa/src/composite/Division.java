@@ -1,14 +1,18 @@
 package composite;
 
-public class Division extends Operacion{
-
-	public Division(double i, double j) {
-		super(i, j);
+public class Division implements Operacion{
+	
+	private double dividendo;
+	private double divisor;
+	
+	public Division(double dividendo, double divisor) {
+		this.dividendo = dividendo;
+		this.divisor = divisor;
 	}
 
 	@Override
 	public double resolver() {
-		return numero1/numero2;
+		return dividendo/divisor;
 	}
 	
 }
