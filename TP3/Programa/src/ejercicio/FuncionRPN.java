@@ -1,4 +1,4 @@
-package model;
+package ejercicio;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -82,12 +82,9 @@ public class FuncionRPN {
 			double resultado = 0;
 			String[] variables = puntos[i].split(" ");
 			if (cantVariables == 3) {
-				resultado = RPN.resolver(RPN.generarFuncion(funcion), 	Double.parseDouble(variables[0]), 
-																		Double.parseDouble(variables[1]), 
-																		Double.parseDouble(variables[2]));
+				resultado = RPN.resolver(RPN.generarFuncion(funcion), 	Double.parseDouble(variables[0]), Double.parseDouble(variables[1]), Double.parseDouble(variables[2]));
 			}else if (cantVariables == 2) {
-				resultado = RPN.resolver(RPN.generarFuncion(funcion), 	Double.parseDouble(variables[0]), 
-																		Double.parseDouble(variables[1]), null);
+				resultado = RPN.resolver(RPN.generarFuncion(funcion), 	Double.parseDouble(variables[0]), Double.parseDouble(variables[1]), null);
 			}else{
 				resultado = RPN.resolver(RPN.generarFuncion(funcion), 	Double.parseDouble(variables[0]), null, null);
 			}

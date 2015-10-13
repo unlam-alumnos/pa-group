@@ -1,6 +1,6 @@
 package model.singleton;
 
-import model.composite.Funcion;
+import model.Funcion;
 
 public abstract class Variable implements Funcion{
 

@@ -1,6 +1,6 @@
-package operaciones;
+package model.operaciones;
 
-import model.composite.Funcion;
+import model.Funcion;
 import model.composite.OperacionUnaria;
 
 public class Logaritmo extends OperacionUnaria {

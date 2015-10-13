@@ -1,4 +1,4 @@
-package model;
+package ejercicio;
 
 public class Main {
 

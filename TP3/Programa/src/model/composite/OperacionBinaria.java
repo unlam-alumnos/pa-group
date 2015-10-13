@@ -1,5 +1,7 @@
 package model.composite;
 
+import model.Funcion;
+
 public abstract class OperacionBinaria implements Funcion {
 
 	protected Funcion izquierda;

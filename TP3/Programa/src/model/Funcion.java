@@ -1,4 +1,4 @@
-package model.composite;
+package model;
 
 public interface Funcion {
 	

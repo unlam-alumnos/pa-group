@@ -1,13 +1,14 @@
 package test;
 
-import model.RPN;
-import model.composite.Funcion;
+import model.Funcion;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class RPNTest {
+import ejercicio.RPN;
+
+public class Enunciado_ejemplo1 {
 
 	private static final String FUNCION = "2 x 2 ^ 3 * +";
 	

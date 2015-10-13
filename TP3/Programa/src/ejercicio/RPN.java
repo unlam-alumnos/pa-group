@@ -1,19 +1,19 @@
-package model;
+package ejercicio;
 
 import java.util.Stack;
 
-import model.composite.Constante;
-import model.composite.Funcion;
+import model.Constante;
+import model.Funcion;
+import model.operaciones.Division;
+import model.operaciones.Logaritmo;
+import model.operaciones.Multiplicacion;
+import model.operaciones.Potenciacion;
+import model.operaciones.Resta;
+import model.operaciones.Suma;
 import model.singleton.Variable;
 import model.singleton.X;
 import model.singleton.Y;
 import model.singleton.Z;
-import operaciones.Division;
-import operaciones.Logaritmo;
-import operaciones.Multiplicacion;
-import operaciones.Potenciacion;
-import operaciones.Resta;
-import operaciones.Suma;
 
 public class RPN {
 

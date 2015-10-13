@@ -1,5 +1,7 @@
 package model.composite;
 
+import model.Funcion;
+
 
 public abstract class OperacionUnaria implements Funcion {
 	

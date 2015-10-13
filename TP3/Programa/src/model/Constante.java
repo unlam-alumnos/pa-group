@@ -1,4 +1,4 @@
-package model.composite;
+package model;
 
 public class Constante implements Funcion{
 
