@@ -47,7 +47,7 @@ public class GrafoNDNP {
 
 		
 		//HACEMOS LAS 10000 CORRIDAS
-		int cantCorridas = 5;
+		int cantCorridas = 1250;
 		
 		
 		for (int i = 1; i <= cantCorridas; i++) {
@@ -56,7 +56,7 @@ public class GrafoNDNP {
 			
 			
 			Grafo g1 = new Grafo();
-			g1.grafoDadoNYPorcentajeAdy(600, 40);
+			g1.grafoDadoNYPorcentajeAdy(600, 80);
 			
 			
 			//coloreamos usando los 3 algoritmos
