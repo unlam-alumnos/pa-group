@@ -139,6 +139,7 @@ public class ColoreoMatula {
 	
 
 	public void resolver() {
+	
 		for(int x = 0; x < cantidadNodos; x++){
 			Integer nodo = nodos.get(x);
 			colorNodos.set(nodo, 1);

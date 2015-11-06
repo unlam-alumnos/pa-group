@@ -47,7 +47,7 @@ public class GrafoNDNP {
 
 		
 		//HACEMOS LAS 10000 CORRIDAS
-		int cantCorridas = 2500;
+		int cantCorridas = 5;
 		
 		
 		for (int i = 1; i <= cantCorridas; i++) {

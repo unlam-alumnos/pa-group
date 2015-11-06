@@ -1,6 +1,7 @@
 package generadores;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class Grafo {
 
@@ -11,6 +12,7 @@ public class Grafo {
 	private double porcentajeAdy;
 	private int gradoMax;
 	private int gradoMin;
+	private int [] vectorGrados;
 	
 
 	public Grafo(String ruta) {
@@ -69,9 +71,21 @@ public class Grafo {
 	public void grafoDadoNYProbArista(int cantidad, double prob) { // Prob va de
 																	// 0 a 1.
 		
+		
+		for (int i = 0; i < cantNodos; i++) {
+			vectorGrados[i]=0;
+		}
+		
 		cantNodos = cantidad;
 		cantAristas = 0;
 		matrizAdy = new int[cantNodos][cantNodos];
+		
+		
+		vectorGrados= new int[cantNodos+1];
+		vectorGrados[0]=-1;
+		for (int i = 1; i <= cantNodos; i++) {
+			vectorGrados[i]=0;
+		}
 
 		for (int i = 0; i < cantNodos; i++)
 			for (int j = i; j < cantNodos; j++) {
@@ -88,21 +102,35 @@ public class Grafo {
 					costo = (int) (Math.random() * 100);
 					matrizAdy[i][j] = costo;
 					matrizAdy[j][i] = costo;
+					vectorGrados[i]++;
+					vectorGrados[j]++;
 					cantAristas++;
 				}
 			}
 		int aristasMax = (int) ((cantNodos * (cantNodos - 1)) / 2);
 		porcentajeAdy = (cantAristas * 100) / aristasMax;
-		gradoMax = buscarGradoMax();
-		gradoMin = buscarGradoMin();
+		
+		Arrays.sort(vectorGrados);
+		gradoMax = vectorGrados[cantNodos];
+		gradoMin = vectorGrados[1];
 
 	}
 
 	public void grafoDadoNYPorcentajeAdy(int cantidad, int porcentaje) {
+		
+		
+		
+		
 		cantNodos = cantidad;
 		porcentajeAdy = porcentaje;
 		cantAristas = (int) ((cantNodos * (cantNodos - 1) / 2) * (porcentajeAdy / 100));
 		matrizAdy = new int[cantNodos][cantNodos];
+		
+		vectorGrados= new int[cantNodos+1];
+		vectorGrados[0]=-1;
+		for (int i = 1; i <= cantNodos; i++) {
+			vectorGrados[i]=0;
+		}
 
 		//inicializo la matriz en 0
 		for (int i = 0; i < cantNodos; i++)
@@ -123,6 +151,9 @@ public class Grafo {
 			if (filas != columnas && matrizAdy[filas][columnas] == 0) {
 				matrizAdy[filas][columnas] = 1;
 				matrizAdy[columnas][filas] = 1;
+				vectorGrados[filas]++;
+				vectorGrados[columnas]++;
+				
 				aristasAux--;
 			}
 		}
@@ -141,9 +172,9 @@ public class Grafo {
 			
 		}
 		*/
-		
-		gradoMax = buscarGradoMax();
-		gradoMin = buscarGradoMin();
+		Arrays.sort(vectorGrados);
+		gradoMax = vectorGrados[cantNodos];
+		gradoMin = vectorGrados[1];
 		
 
 	}
