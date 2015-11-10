@@ -1,7 +1,5 @@
 package model;
 
-import java.io.*;
-
 
 public class MatrizSimetrica {
 	private boolean vector[];

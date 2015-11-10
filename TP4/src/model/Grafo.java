@@ -4,66 +4,78 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class Grafo {
 
 	protected Integer cantidadNodos;
 	protected Integer cantidadAristas;
 	protected Integer porcentajeAdyacencia;
-	protected Integer gradoMinimo;
-	protected Integer gradoMaximo;
 	protected MatrizSimetrica matrizAdyacencia;
 	protected Nodo[] nodos;
-
-	//protected ArrayList<Integer> nodos = new ArrayList<Integer>();
-	protected ArrayList<Integer> gradoNodo = new ArrayList<Integer>();
-	protected ArrayList<Integer> colorNodos = new ArrayList<Integer>();
+	protected Integer gradoMinimo;
+	protected Integer gradoMaximo;
 	protected Integer cantidadColores;
 
 	public Grafo() {
 	}
 
-	public Grafo(Integer cantidadNodos, Integer cantidadAristas,
+	public Grafo(Integer cantidadNodos, Nodo[] nodos, Integer cantidadAristas,
 			Integer porcentajeAdyacencia, Integer gradoMinimo,
 			Integer gradoMaximo, MatrizSimetrica matrizAdyacencia) {
 		this.cantidadNodos = cantidadNodos;
+		this.nodos = nodos;
 		this.cantidadAristas = cantidadAristas;
 		this.porcentajeAdyacencia = porcentajeAdyacencia;
 		this.gradoMinimo = gradoMinimo;
 		this.gradoMaximo = gradoMaximo;
 		this.matrizAdyacencia = matrizAdyacencia;
+		this.cantidadColores = cantidadNodos;		
 	}
 
 	public Grafo(Grafo otro) {
-		this(otro.getCantidadNodos(), otro.getCantidadAristas(), otro
-				.getPorcentajeAdyacencia(), otro.getGradoMinimo(), otro
-				.getGradoMaximo(), otro.getMatrizAdyacencia());
+		this(otro.getCantidadNodos(), otro.getNodosArray(), otro
+				.getCantidadAristas(), otro.getPorcentajeAdyacencia(), otro
+				.getGradoMinimo(), otro.getGradoMaximo(), otro
+				.getMatrizAdyacencia());
 	}
 
-	public Grafo(String entrada) {
+	public Grafo(String ruta) {
 		File archivo = null;
 		FileReader fr = null;
 		BufferedReader br = null;
 
 		try {
-			archivo = new File(entrada);
+			archivo = new File(ruta);
 			fr = new FileReader(archivo);
 			br = new BufferedReader(fr);
 			String[] data;
 
 			data = br.readLine().split(" ");
 			cantidadNodos = Integer.parseInt(data[0]);
+			nodos = new Nodo[cantidadNodos + 1];
 			cantidadAristas = Integer.parseInt(data[1]);
 			porcentajeAdyacencia = Integer.parseInt(data[2]);
 			gradoMaximo = Integer.parseInt(data[3]);
 			gradoMinimo = Integer.parseInt(data[4]);
 			matrizAdyacencia = new MatrizSimetrica(cantidadNodos);
+			cantidadColores = cantidadNodos;
 
 			while ((data = br.readLine().split(" ")) != null) {
 				int nodoOrigen = Integer.parseInt(data[0]);
 				int nodoDestino = Integer.parseInt(data[1]);
+
+				if (nodos[nodoOrigen] == null) {
+					nodos[nodoOrigen] = new Nodo(nodoOrigen);
+				} else {
+					nodos[nodoOrigen].addGrado();
+				}
+
+				if (nodos[nodoDestino] == null) {
+					nodos[nodoDestino] = new Nodo(nodoDestino);
+				} else {
+					nodos[nodoDestino].addGrado();
+				}
+
 				matrizAdyacencia.setNodo(nodoOrigen, nodoDestino);
 			}
 
@@ -109,18 +121,24 @@ public class Grafo {
 		}
 	}
 
-	public void generarArchivoSalida(File archivo) {
+	public void generarArchivoSalida(String ruta) {
+		File archivo = null;
 		PrintWriter pw = null;
+		StringBuffer sb = null;
 		try {
+			archivo = new File(ruta);
 			pw = new PrintWriter(archivo);
+			sb = new StringBuffer();
+
 			pw.println(cantidadNodos + " " + cantidadColores + " "
 					+ cantidadAristas + " " + porcentajeAdyacencia + " "
 					+ gradoMaximo + " " + gradoMinimo);
 
-			for (int x = 0; x < cantidadNodos; x++) {
-				Integer nodo = nodos.get(x);
-				pw.println(nodo + " " + colorNodos.get(nodo));
+			for (int i = 0; i < cantidadNodos; i++) {
+				sb.append(nodos[i].getIndice() + " " + nodos[i].getColor());
 			}
+
+			pw.println(sb.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -129,8 +147,63 @@ public class Grafo {
 		}
 	}
 
-	public void desordenarNodos() {
-		Collections.shuffle(nodos);
+	protected void colorear() {
+	}
+
+	public boolean isAdyacentes(int nodoOrigen, int nodoDestino) {
+		return this.getMatrizAdyacencia().isAdyacentes(nodoOrigen, nodoDestino);
+	}
+
+	public void shuffle() {
+		int inicio = 0;
+		int fin = 0;
+		int gradoActual = 0;
+
+		while (fin < cantidadNodos) {
+			gradoActual = nodos[inicio].getGrado();
+			while (fin < cantidadNodos && nodos[fin].getGrado() == gradoActual) {
+				fin++;
+			}
+			if (inicio != (fin - 1)) {
+				this.shuffle(inicio, fin - 1);
+			}
+			inicio = fin;
+		}
+	}
+
+	public void shuffle(int inicio, int fin) {
+		int cantidad = (fin - inicio + 1);
+		int random;
+		Nodo aux;
+
+		for (int i = inicio; i < fin; i++) {
+			random = (int) (Math.random() * cantidad + inicio);
+			aux = nodos[i];
+			nodos[i] = nodos[random];
+			nodos[random] = aux;
+		}
+	}
+
+	public void cleanNodos() {
+		for (int i = 0; i < nodos.length; i++) {
+			nodos[i].clean();
+		}
+	}
+
+	public boolean puedoColorear(int indice, int color) {
+		if (nodos[indice].getColor() != 0) {
+			return false;
+		}
+
+		for (int i = 0; i < cantidadNodos; i++) {
+			if (nodos[i].getColor() == color) {
+				if (isAdyacentes(nodos[i].getIndice(), nodos[indice].getIndice())) {
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 
 	public Integer getCantidadNodos() {
@@ -155,6 +228,10 @@ public class Grafo {
 
 	public MatrizSimetrica getMatrizAdyacencia() {
 		return matrizAdyacencia;
+	}
+
+	public Nodo[] getNodosArray() {
+		return nodos;
 	}
 
 }
