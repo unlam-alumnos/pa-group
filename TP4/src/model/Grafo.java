@@ -1,141 +1,86 @@
 package model;
 
-import model.MatrizSimetrica;
-
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class Grafo {
 
-	protected int inf = 100000;
-	protected MatrizSimetrica matrizAdyacencia;
 	protected Integer cantidadNodos;
 	protected Integer cantidadAristas;
 	protected Integer porcentajeAdyacencia;
+	protected Integer gradoMinimo;
+	protected Integer gradoMaximo;
+	protected MatrizSimetrica matrizAdyacencia;
+	protected Nodo[] nodos;
+
+	//protected ArrayList<Integer> nodos = new ArrayList<Integer>();
 	protected ArrayList<Integer> gradoNodo = new ArrayList<Integer>();
-	protected ArrayList<Integer> nodos = new ArrayList<Integer>();
 	protected ArrayList<Integer> colorNodos = new ArrayList<Integer>();
-	protected Integer cantidadColores = 1;
-	protected Integer maximoGrado;
-	protected Integer minimoGrado;
-	
-	public Grafo(){}
-	
-	public Grafo(String ruta) {
-		this.matrizAdyacencia = new MatrizSimetrica(ruta);
-		this.cantidadNodos = matrizAdyacencia.getCantNodos();
-		this.cantidadAristas = matrizAdyacencia.getCantAristas();
-		this.porcentajeAdyacencia = (int) ((cantidadAristas - 1) * 100) / (((cantidadNodos -1) * cantidadNodos)/2);
+	protected Integer cantidadColores;
 
-		for(int x = 0; x < cantidadNodos; x++) {
-			gradoNodo.add(0);
-			nodos.add(x);
-			colorNodos.add(0);
-		}
-
-		for (int x = 0; x < cantidadNodos; x++)
-			for (int y = x + 1; y < cantidadNodos; y++) 
-				if(matrizAdyacencia.getValueVector(x, y) == 1) {
-					gradoNodo.set(x, gradoNodo.get(x) + 1);
-					gradoNodo.set(y, gradoNodo.get(y) + 1);
-				}
-
-		for (int x = 0; x < cantidadNodos; x++) 
-			for (int y = x + 1; y < cantidadNodos; y++) 
-				if (gradoNodo.get(x) > gradoNodo.get(y)) {
-					Integer auxGrado = gradoNodo.get(x);
-					gradoNodo.set(x, gradoNodo.get(y));
-					gradoNodo.set(y, auxGrado);
-					Integer auxNodo = nodos.get(x);
-					nodos.set(x, nodos.get(y));
-					nodos.set(y, auxNodo);
-				}
-		
-		this.minimoGrado = gradoNodo.get(0);
-		this.maximoGrado = gradoNodo.get(cantidadNodos - 1);
+	public Grafo() {
 	}
-	/*
-	public Grafo (Grafo grafo){ 
-		this.minimoGrado = grafo.getMinimoGrado();
-		this.maximoGrado = grafo.getMaximoGrado();
-		this.cantidadNodos= grafo.getCantidadNodos();
-		this.cantidadAristas = grafo.getCantidadAristas();
-		this.porcentajeAdyacencia = (int)grafo.getPorcentajeAdyacencia();
-		
-		matrizAdyacencia = new MatrizSimetrica(cantidadNodos);
-		matrizAdyacencia.setCantAristas(cantidadAristas);
-		matrizAdyacencia.setVector(grafo.getMatrizAdyacencia().getMatrizSimetrica());
-				
-		for(int x = 0; x < cantidadNodos; x++) {
-			gradoNodo.add(0);
-			nodos.add(x);
-			colorNodos.add(0);
-		}
 
-		for (int x = 0; x < cantidadNodos; x++)
-			for (int y = x + 1; y < cantidadNodos; y++) 
-				if(matrizAdyacencia.getValueVector(x, y) == 1) {
-					gradoNodo.set(x, gradoNodo.get(x) + 1);
-					gradoNodo.set(y, gradoNodo.get(y) + 1);
-				}
-
-		for (int x = 0; x < cantidadNodos; x++) 
-			for (int y = x + 1; y < cantidadNodos; y++) 
-				if (gradoNodo.get(x) > gradoNodo.get(y)) {
-					Integer auxGrado = gradoNodo.get(x);
-					gradoNodo.set(x, gradoNodo.get(y));
-					gradoNodo.set(y, auxGrado);
-					Integer auxNodo = nodos.get(x);
-					nodos.set(x, nodos.get(y));
-					nodos.set(y, auxNodo);
-				}
-		
-		this.minimoGrado = gradoNodo.get(0);
-		this.maximoGrado = gradoNodo.get(cantidadNodos - 1);		
+	public Grafo(Integer cantidadNodos, Integer cantidadAristas,
+			Integer porcentajeAdyacencia, Integer gradoMinimo,
+			Integer gradoMaximo, MatrizSimetrica matrizAdyacencia) {
+		this.cantidadNodos = cantidadNodos;
+		this.cantidadAristas = cantidadAristas;
+		this.porcentajeAdyacencia = porcentajeAdyacencia;
+		this.gradoMinimo = gradoMinimo;
+		this.gradoMaximo = gradoMaximo;
+		this.matrizAdyacencia = matrizAdyacencia;
 	}
-	*/
-	public Grafo (Grafo grafo , MatrizSimetrica mat){ 
-		this.minimoGrado = grafo.getMinimoGrado();
-		this.maximoGrado = grafo.getMaximoGrado();
-		this.cantidadNodos= grafo.getCantidadNodos();
-		this.cantidadAristas = grafo.getCantidadAristas();
-		this.porcentajeAdyacencia = (int)grafo.getPorcentajeAdyacencia();
-		
-		matrizAdyacencia = mat;
-				
-		for(int x = 0; x < cantidadNodos; x++) {
-			gradoNodo.add(0);
-			nodos.add(x);
-			colorNodos.add(0);
-		}
 
-		for (int x = 0; x < cantidadNodos; x++)
-			for (int y = x + 1; y < cantidadNodos; y++) 
-				if(matrizAdyacencia.getValueVector(x, y) == 1) {
-					gradoNodo.set(x, gradoNodo.get(x) + 1);
-					gradoNodo.set(y, gradoNodo.get(y) + 1);
-				}
-
-		for (int x = 0; x < cantidadNodos; x++) 
-			for (int y = x + 1; y < cantidadNodos; y++) 
-				if (gradoNodo.get(x) > gradoNodo.get(y)) {
-					Integer auxGrado = gradoNodo.get(x);
-					gradoNodo.set(x, gradoNodo.get(y));
-					gradoNodo.set(y, auxGrado);
-					Integer auxNodo = nodos.get(x);
-					nodos.set(x, nodos.get(y));
-					nodos.set(y, auxNodo);
-				}
-		
-		this.minimoGrado = gradoNodo.get(0);
-		this.maximoGrado = gradoNodo.get(cantidadNodos - 1);
-		
+	public Grafo(Grafo otro) {
+		this(otro.getCantidadNodos(), otro.getCantidadAristas(), otro
+				.getPorcentajeAdyacencia(), otro.getGradoMinimo(), otro
+				.getGradoMaximo(), otro.getMatrizAdyacencia());
 	}
-	
+
+	public Grafo(String entrada) {
+		File archivo = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+
+		try {
+			archivo = new File(entrada);
+			fr = new FileReader(archivo);
+			br = new BufferedReader(fr);
+			String[] data;
+
+			data = br.readLine().split(" ");
+			cantidadNodos = Integer.parseInt(data[0]);
+			cantidadAristas = Integer.parseInt(data[1]);
+			porcentajeAdyacencia = Integer.parseInt(data[2]);
+			gradoMaximo = Integer.parseInt(data[3]);
+			gradoMinimo = Integer.parseInt(data[4]);
+			matrizAdyacencia = new MatrizSimetrica(cantidadNodos);
+
+			while ((data = br.readLine().split(" ")) != null) {
+				int nodoOrigen = Integer.parseInt(data[0]);
+				int nodoDestino = Integer.parseInt(data[1]);
+				matrizAdyacencia.setNodo(nodoOrigen, nodoDestino);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (fr != null) {
+					fr.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+
 	public void guardarGrafo(String ruta) {
-
 		File archivo = null;
 		PrintWriter pw = null;
 		StringBuffer sb = null;
@@ -143,20 +88,16 @@ public class Grafo {
 			archivo = new File(ruta);
 			pw = new PrintWriter(archivo);
 			sb = new StringBuffer();
-			
-			porcentajeAdyacencia = (int) porcentajeAdyacencia;
-
-			pw.println(cantidadNodos + " " + cantidadAristas + " "+ (int) porcentajeAdyacencia + " " + maximoGrado + " " + minimoGrado);
+			pw.println(cantidadNodos + " " + cantidadAristas + " "
+					+ porcentajeAdyacencia + " " + gradoMaximo + " "
+					+ gradoMinimo);
 			for (int i = 0; i < cantidadNodos; i++)
 				for (int j = i + 1; j < cantidadNodos; j++) {
-					if (matrizAdyacencia.getValueVector(i,j) != inf) {
-						sb.append(i + " " + j + " " + matrizAdyacencia.getValueVector(i,j));
-						sb.append("\n");
-						//pw.println(i + " " + j + " " + matrizAdyacencia.getMatrizSimetrica()[i][j]);
+					if (matrizAdyacencia.isAdyacentes(i, j)) {
+						sb.append(i + " " + j + "\n");
 					}
 				}
 			pw.println(sb.toString());
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -167,14 +108,14 @@ public class Grafo {
 			}
 		}
 	}
-	
+
 	public void generarArchivoSalida(File archivo) {
 		PrintWriter pw = null;
 		try {
 			pw = new PrintWriter(archivo);
 			pw.println(cantidadNodos + " " + cantidadColores + " "
 					+ cantidadAristas + " " + porcentajeAdyacencia + " "
-					+ maximoGrado + " " + minimoGrado);
+					+ gradoMaximo + " " + gradoMinimo);
 
 			for (int x = 0; x < cantidadNodos; x++) {
 				Integer nodo = nodos.get(x);
@@ -188,18 +129,10 @@ public class Grafo {
 		}
 	}
 
-	public void desordenarNodos(){
+	public void desordenarNodos() {
 		Collections.shuffle(nodos);
 	}
-	
-	public MatrizSimetrica getMatrizAdyacencia() {
-		return matrizAdyacencia;
-	}
-	
-	public Integer getCantidadColores() {
-		return cantidadColores;
-	}	
-	
+
 	public Integer getCantidadNodos() {
 		return cantidadNodos;
 	}
@@ -208,20 +141,20 @@ public class Grafo {
 		return cantidadAristas;
 	}
 
-	public Integer getMaximoGrado() {
-		return maximoGrado;
-	}
-
-	public Integer getMinimoGrado() {
-		return minimoGrado;
-	}
-
 	public Integer getPorcentajeAdyacencia() {
 		return porcentajeAdyacencia;
 	}
 
-	public ArrayList<Integer> getNodos() {
-		return nodos;
+	public Integer getGradoMinimo() {
+		return gradoMinimo;
 	}
-	
+
+	public Integer getGradoMaximo() {
+		return gradoMaximo;
+	}
+
+	public MatrizSimetrica getMatrizAdyacencia() {
+		return matrizAdyacencia;
+	}
+
 }

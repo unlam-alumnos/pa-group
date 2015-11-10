@@ -20,8 +20,8 @@ public class WelshPowell extends Grafo{
 	*/
 	
 	public WelshPowell(Grafo grafo , MatrizSimetrica mat){ 
-		this.minimoGrado = grafo.getMaximoGrado();
-		this.maximoGrado = grafo.getMinimoGrado();
+		this.gradoMinimo = grafo.getMaximoGrado();
+		this.gradoMaximo = grafo.getMinimoGrado();
 		this.cantidadNodos= grafo.getCantidadNodos();
 		this.cantidadAristas = grafo.getCantidadAristas();
 		this.nodos = grafo.getNodos();
@@ -53,8 +53,8 @@ public class WelshPowell extends Grafo{
 					nodos.set(y, auxNodo);
 				}
 		
-		this.maximoGrado = gradoNodo.get(0);
-		this.minimoGrado = gradoNodo.get(cantidadNodos - 1);
+		this.gradoMaximo = gradoNodo.get(0);
+		this.gradoMinimo = gradoNodo.get(cantidadNodos - 1);
 	}
 	
 	
@@ -82,12 +82,5 @@ public class WelshPowell extends Grafo{
 			 }
 		}
 	}
-
-	public static void main(String[] args) {
-		WelshPowell welshPowell = new WelshPowell("grafo.in");
-		welshPowell.colorear();
-		welshPowell.generarArchivoSalida(new File("coloreadoWelsh.out"));
-	}
-	
 }
 	

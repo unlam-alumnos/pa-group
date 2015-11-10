@@ -1,18 +1,20 @@
 package model;
 
-public class Generador extends Grafo{
-	
-	public Generador(){}
+import java.util.Random;
+
+public class Generador extends Grafo {
+
+	public Generador() { }
 
 	private int buscarGradoMax() {
-		int grado, aux;
+		int grado = 0;
+		int aux = 0;
 
-		grado = 0;
 		for (int i = 0; i < cantidadNodos; i++) {
-			aux = 0;
 			for (int j = 0; j < cantidadNodos; j++)
-				if (matrizAdyacencia.getValueVector(i, j) != inf)
+				if (matrizAdyacencia.isAdyacentes(i, j)) {
 					aux++;
+				}
 			if (aux > grado)
 				grado = aux;
 		}
@@ -20,36 +22,36 @@ public class Generador extends Grafo{
 	}
 
 	private int buscarGradoMin() {
-		int grado, aux;
+		int grado = 0;
+		int aux = 0;
 
-		grado = inf;
 		for (int i = 0; i < cantidadNodos; i++) {
-			aux = 0;
 			for (int j = 0; j < cantidadNodos; j++)
-				if (matrizAdyacencia.getValueVector(i, j) != inf)
+				if (matrizAdyacencia.isAdyacentes(i, j)) {
 					aux++;
+				}
 			if (aux < grado)
 				grado = aux;
 		}
 		return grado;
 	}
-	
-	public void grafoDadoNYProbArista(int cantidad, double prob) { 
+
+	public void grafoDadoNYProbArista(int cantidad, double prob) {
 		// Prob va de 0 a 1.
 		cantidadNodos = cantidad;
 		cantidadAristas = 0;
 		matrizAdyacencia = new MatrizSimetrica(cantidadNodos);
-		
-		for (int i = 0; i < cantidadNodos; i++){
+
+		for (int i = 0; i < cantidadNodos; i++) {
 			for (int j = i; j < cantidadNodos; j++) {
 				matrizAdyacencia.setValueVector(i, j, inf);
 				matrizAdyacencia.setValueVector(j, i, inf);
-			}			
+			}
 		}
-		
+
 		int costo = inf;
 		double rand;
-		for (int i = 0; i < cantidadNodos; i++){
+		for (int i = 0; i < cantidadNodos; i++) {
 			for (int j = i + 1; j < cantidadNodos; j++) {
 				rand = Math.random();
 				if (rand < prob) {
@@ -58,29 +60,29 @@ public class Generador extends Grafo{
 					matrizAdyacencia.setValueVector(j, i, costo);
 					cantidadAristas++;
 				}
-			}	
+			}
 		}
-			
+
 		int aristasMax = (int) ((cantidadNodos * (cantidadNodos - 1)) / 2);
 		porcentajeAdyacencia = (cantidadAristas * 100) / aristasMax;
-		maximoGrado = buscarGradoMax();
-		minimoGrado = buscarGradoMin();
+		gradoMaximo = buscarGradoMax();
+		gradoMinimo = buscarGradoMin();
 	}
-	
+
 	public void grafoDadoNYPorcentajeAdy(int cantidad, int porcentaje) {
 		cantidadNodos = cantidad;
 		porcentajeAdyacencia = porcentaje;
 		cantidadAristas = (int) ((cantidadNodos * (cantidadNodos - 1) / 2) * (porcentajeAdyacencia / 100));
 		matrizAdyacencia = new MatrizSimetrica(cantidadNodos);
 
-		//inicializo la matriz en 0
-		for (int i = 0; i < cantidadNodos; i++){
+		// inicializo la matriz en 0
+		for (int i = 0; i < cantidadNodos; i++) {
 			for (int j = i; j < cantidadNodos; j++) {
 				matrizAdyacencia.setValueVector(i, j, 0);
 				matrizAdyacencia.setValueVector(j, i, 0);
 			}
 		}
-		
+
 		int aristasAux = cantidadAristas;
 		int filas, columnas, rand;
 
@@ -90,17 +92,18 @@ public class Generador extends Grafo{
 			columnas = (int) (Math.random() * cantidadNodos);
 			rand = (int) (Math.random() * 100);
 
-			if (filas != columnas && matrizAdyacencia.getValueVector(filas, columnas) == 0) {
+			if (filas != columnas
+					&& matrizAdyacencia.getValueVector(filas, columnas) == 0) {
 				matrizAdyacencia.setValueVector(filas, columnas, 1);
 				matrizAdyacencia.setValueVector(columnas, filas, 1);
 				aristasAux--;
 			}
 		}
-		
-		maximoGrado = buscarGradoMax();
-		minimoGrado = buscarGradoMin();
+
+		gradoMaximo = buscarGradoMax();
+		gradoMinimo = buscarGradoMin();
 	}
-	
+
 	public void grafoRegularDadoGradoYN(int cantidad, int grado) {
 
 		cantidadNodos = cantidad;
@@ -138,8 +141,8 @@ public class Generador extends Grafo{
 			}
 		}
 
-		maximoGrado = grado;
-		minimoGrado = grado;
+		gradoMaximo = grado;
+		gradoMinimo = grado;
 
 		if (matrizAdyacencia == null) {
 			System.out
@@ -154,8 +157,8 @@ public class Generador extends Grafo{
 
 		int grado = (int) ((porcentajeAdyacencia * (cantidadNodos - 1)) / 100);
 
-		maximoGrado = grado;
-		minimoGrado = grado;
+		gradoMaximo = grado;
+		gradoMinimo = grado;
 
 		cantidadNodos = cantidad;
 		cantidadAristas = (cantidadNodos * grado) / 2;
@@ -239,10 +242,10 @@ public class Generador extends Grafo{
 		int aristasMax = (int) ((cantidadNodos * (cantidadNodos - 1)) / 2);
 		porcentajeAdyacencia = (cantidadAristas * 100) / aristasMax;
 
-		maximoGrado = buscarGradoMax();
-		minimoGrado = buscarGradoMin();
+		gradoMaximo = buscarGradoMax();
+		gradoMinimo = buscarGradoMin();
 	}
-	
+
 	private int[] generarTamanioSubGrafos(int cantNodos, int n) {
 
 		int[] cantidades = new int[n];

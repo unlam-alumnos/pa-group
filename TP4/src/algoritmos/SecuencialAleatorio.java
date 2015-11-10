@@ -20,8 +20,8 @@ public class SecuencialAleatorio extends Grafo{
 	*/
 	
 	public SecuencialAleatorio(Grafo grafo , MatrizSimetrica mat){  
-		this.minimoGrado = grafo.getMaximoGrado();
-		this.maximoGrado = grafo.getMinimoGrado();
+		this.gradoMinimo = grafo.getMaximoGrado();
+		this.gradoMaximo = grafo.getMinimoGrado();
 		this.cantidadNodos= grafo.getCantidadNodos();
 		this.cantidadAristas = grafo.getCantidadAristas();
 		this.porcentajeAdyacencia = (int)grafo.getPorcentajeAdyacencia();
@@ -42,8 +42,8 @@ public class SecuencialAleatorio extends Grafo{
 			}
 		
 		//Collections.sort(gradoNodo);
-		this.minimoGrado = gradoNodo.get(0);
-		this.maximoGrado = gradoNodo.get(cantidadNodos - 1);
+		this.gradoMinimo = gradoNodo.get(0);
+		this.gradoMaximo = gradoNodo.get(cantidadNodos - 1);
 	}
 	
 	public void colerear() {
@@ -69,11 +69,5 @@ public class SecuencialAleatorio extends Grafo{
 					cantidadColores = colorNodos.get(nodo);
 			 }
 		}
-	}
-	
-	public static void main(String[] args) {
-		SecuencialAleatorio secuencialAleatorio = new SecuencialAleatorio("grafo.in");
-		secuencialAleatorio.colerear();
-		secuencialAleatorio.generarArchivoSalida(new File("coloreoSecuencialAle.out"));
 	}
 }

@@ -16,8 +16,8 @@ public class Matula extends Grafo{
 	}
 	*/
 	public Matula (Grafo grafo , MatrizSimetrica mat){ 
-		this.minimoGrado = grafo.getMaximoGrado();
-		this.maximoGrado = grafo.getMinimoGrado();
+		this.gradoMinimo = grafo.getMaximoGrado();
+		this.gradoMaximo = grafo.getMinimoGrado();
 		this.cantidadNodos= grafo.getCantidadNodos();
 		this.cantidadAristas = grafo.getCantidadAristas();
 		this.porcentajeAdyacencia = (int)grafo.getPorcentajeAdyacencia();
@@ -49,8 +49,8 @@ public class Matula extends Grafo{
 					nodos.set(y, auxNodo);
 				}
 		
-		this.minimoGrado = gradoNodo.get(0);
-		this.maximoGrado = gradoNodo.get(cantidadNodos - 1);		
+		this.gradoMinimo = gradoNodo.get(0);
+		this.gradoMaximo = gradoNodo.get(cantidadNodos - 1);		
 	}
 
 	public void colorear() {
@@ -77,11 +77,4 @@ public class Matula extends Grafo{
 			 }
 		}
 	}
-
-	public static void main(String[] args) {
-		Matula matula = new Matula("grafo.in");
-		matula.colorear();
-		matula.generarArchivoSalida(new File("coloreadoMatula.out"));
-	}
-
 }
