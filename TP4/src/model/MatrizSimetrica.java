@@ -1,4 +1,4 @@
-package generadores;
+package model;
 
 import java.io.*;
 
@@ -45,41 +45,21 @@ public class MatrizSimetrica {
 		int tamVector = (int) ((Math.pow(cantNodos, 2) - cantNodos) / 2);
 		vector = new int[tamVector];
 	}
-
-	
-	
+	/*
 	public void setVector (int[][] matriz){
 		cantNodos= matriz.length;
 		int tamVector = (int) ((Math.pow(cantNodos, 2) - cantNodos) / 2);
 		vector = new int[tamVector];
 		for (int i = 0; i < cantNodos; i++) {
 			for (int j = i; j < cantNodos; j++) {
-				
 				setValueVector(i,j,matriz[i][j]);
-				
 			}
 		}
-				
 	}
-	
-	public int[][] getMatrizSimetrica (){
-		int [][] matriz = new int[cantNodos][cantNodos];
-		
-		for (int i = 0; i < cantNodos-1; i++) {
-			for (int j = (i+1); j < cantNodos; j++) {
-				if(this.getValueVector(i, j)>0)
-				matriz[i][j]= 1;
-			}
-		}
-		return matriz;
-		
-		
-		
-		
+	*/
+	public void setVector (int[] vector){
+		this.vector = vector;
 	}
-	
-	
-	
 	public void setValueVector(int fila, int columna, int valor) {
 		if (columna < fila) {
 			int aux = fila;
@@ -114,13 +94,6 @@ public class MatrizSimetrica {
 	public int getCantAristas() {
 		return cantAristas;
 	}
-/*
-	public static void main(String[] arg) {
-		MatrizSimetrica m1 = new MatrizSimetrica(4);
-		m1.setValueVector(1, 2, 32);
-		System.out.println(m1.getValueVector(1, 2));
-	}
-	*/
 
 	public void setCantNodos(Integer cantidadNodos) {
 		this.cantNodos= cantidadNodos;
@@ -129,5 +102,9 @@ public class MatrizSimetrica {
 	public void setCantAristas(Integer cantidadAristas) {
 		this.cantAristas= cantidadAristas;
 		
+	}
+
+	public int[] getVector() {
+		return vector;
 	}
 }

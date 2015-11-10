@@ -1,28 +1,30 @@
-package algoritmos;
+package model;
+
+import model.MatrizSimetrica;
 
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 
-import generadores.Grafo;
-import generadores.MatrizSimetrica;
+public class Grafo {
 
-public class ColoreoMatula {
-
-	private MatrizSimetrica matrizAdyacencia;
-	private Integer cantidadNodos;
-	private Integer cantidadAristas;
-	private Integer porcentajeAdyacencia;
-	private ArrayList<Integer> gradoNodo = new ArrayList<Integer>();
-	private ArrayList<Integer> nodos = new ArrayList<Integer>();
-	private ArrayList<Integer> colorNodos = new ArrayList<Integer>();
-	private Integer cantidadColores = 1;
-	private Integer maximoGrado;
-	private Integer minimoGrado;
+	protected int inf = 100000;
+	protected MatrizSimetrica matrizAdyacencia;
+	protected Integer cantidadNodos;
+	protected Integer cantidadAristas;
+	protected Integer porcentajeAdyacencia;
+	protected ArrayList<Integer> gradoNodo = new ArrayList<Integer>();
+	protected ArrayList<Integer> nodos = new ArrayList<Integer>();
+	protected ArrayList<Integer> colorNodos = new ArrayList<Integer>();
+	protected Integer cantidadColores = 1;
+	protected Integer maximoGrado;
+	protected Integer minimoGrado;
 	
-	public ColoreoMatula(String ruta) {
-		
-		matrizAdyacencia = new MatrizSimetrica(ruta);
+	public Grafo(){}
+	
+	public Grafo(String ruta) {
+		this.matrizAdyacencia = new MatrizSimetrica(ruta);
 		this.cantidadNodos = matrizAdyacencia.getCantNodos();
 		this.cantidadAristas = matrizAdyacencia.getCantAristas();
 		this.porcentajeAdyacencia = (int) ((cantidadAristas - 1) * 100) / (((cantidadNodos -1) * cantidadNodos)/2);
@@ -54,20 +56,18 @@ public class ColoreoMatula {
 		this.minimoGrado = gradoNodo.get(0);
 		this.maximoGrado = gradoNodo.get(cantidadNodos - 1);
 	}
-	
-	public ColoreoMatula (Grafo grafo){ 
-		this.minimoGrado = grafo.getGradoMin();
-		this.maximoGrado = grafo.getGradoMax();
-		this.cantidadNodos= grafo.getCantNodos();
-		this.cantidadAristas = grafo.getCantAristas();
-		this.porcentajeAdyacencia = (int)grafo.getPorcentajeAdy();
+	/*
+	public Grafo (Grafo grafo){ 
+		this.minimoGrado = grafo.getMinimoGrado();
+		this.maximoGrado = grafo.getMaximoGrado();
+		this.cantidadNodos= grafo.getCantidadNodos();
+		this.cantidadAristas = grafo.getCantidadAristas();
+		this.porcentajeAdyacencia = (int)grafo.getPorcentajeAdyacencia();
 		
 		matrizAdyacencia = new MatrizSimetrica(cantidadNodos);
 		matrizAdyacencia.setCantAristas(cantidadAristas);
-		matrizAdyacencia.setVector(grafo.getMatrizAdy());
-		
-	
-		
+		matrizAdyacencia.setVector(grafo.getMatrizAdyacencia().getMatrizSimetrica());
+				
 		for(int x = 0; x < cantidadNodos; x++) {
 			gradoNodo.add(0);
 			nodos.add(x);
@@ -93,21 +93,18 @@ public class ColoreoMatula {
 				}
 		
 		this.minimoGrado = gradoNodo.get(0);
-		this.maximoGrado = gradoNodo.get(cantidadNodos - 1);
-		
+		this.maximoGrado = gradoNodo.get(cantidadNodos - 1);		
 	}
-	
-	public ColoreoMatula (Grafo grafo , MatrizSimetrica mat){ 
-		this.minimoGrado = grafo.getGradoMin();
-		this.maximoGrado = grafo.getGradoMax();
-		this.cantidadNodos= grafo.getCantNodos();
-		this.cantidadAristas = grafo.getCantAristas();
-		this.porcentajeAdyacencia = (int)grafo.getPorcentajeAdy();
+	*/
+	public Grafo (Grafo grafo , MatrizSimetrica mat){ 
+		this.minimoGrado = grafo.getMinimoGrado();
+		this.maximoGrado = grafo.getMaximoGrado();
+		this.cantidadNodos= grafo.getCantidadNodos();
+		this.cantidadAristas = grafo.getCantidadAristas();
+		this.porcentajeAdyacencia = (int)grafo.getPorcentajeAdyacencia();
 		
 		matrizAdyacencia = mat;
-		
-	
-		
+				
 		for(int x = 0; x < cantidadNodos; x++) {
 			gradoNodo.add(0);
 			nodos.add(x);
@@ -137,32 +134,40 @@ public class ColoreoMatula {
 		
 	}
 	
+	public void guardarGrafo(String ruta) {
 
-	public void resolver() {
-		for(int x = 0; x < cantidadNodos; x++){
-			Integer nodo = nodos.get(x);
-			colorNodos.set(nodo, 1);
-			Boolean coincideColor = false;
-			Boolean finWhile = false;
-			 
-			while(!finWhile) {
-				for(int y = 0; y < cantidadNodos; y++) 
-					if(nodo != y && matrizAdyacencia.getValueVector(nodo, y) == 1) 
-						if(colorNodos.get(nodo).equals(colorNodos.get(y)))
-							coincideColor = true;
-				if(coincideColor) {
-					colorNodos.set(nodo, colorNodos.get(nodo) + 1);
-					coincideColor = false;
-					finWhile = false;
-				} else {
-					finWhile = true;
+		File archivo = null;
+		PrintWriter pw = null;
+		StringBuffer sb = null;
+		try {
+			archivo = new File(ruta);
+			pw = new PrintWriter(archivo);
+			sb = new StringBuffer();
+			
+			porcentajeAdyacencia = (int) porcentajeAdyacencia;
+
+			pw.println(cantidadNodos + " " + cantidadAristas + " "+ (int) porcentajeAdyacencia + " " + maximoGrado + " " + minimoGrado);
+			for (int i = 0; i < cantidadNodos; i++)
+				for (int j = i + 1; j < cantidadNodos; j++) {
+					if (matrizAdyacencia.getValueVector(i,j) != inf) {
+						sb.append(i + " " + j + " " + matrizAdyacencia.getValueVector(i,j));
+						sb.append("\n");
+						//pw.println(i + " " + j + " " + matrizAdyacencia.getMatrizSimetrica()[i][j]);
+					}
 				}
-				if(colorNodos.get(nodo) > cantidadColores)
-					cantidadColores = colorNodos.get(nodo);
-			 }
+			pw.println(sb.toString());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pw.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
-
+	
 	public void generarArchivoSalida(File archivo) {
 		PrintWriter pw = null;
 		try {
@@ -182,52 +187,41 @@ public class ColoreoMatula {
 				pw.close();
 		}
 	}
-	
-	
-	
-	
-	
-	public static void main(String[] args) {
-		ColoreoMatula matula = new ColoreoMatula("grafo.in");
-		matula.resolver();
-		matula.generarArchivoSalida(new File("coloreadoMatula.out"));
-	}
 
+	public void desordenarNodos(){
+		Collections.shuffle(nodos);
+	}
+	
+	public MatrizSimetrica getMatrizAdyacencia() {
+		return matrizAdyacencia;
+	}
+	
 	public Integer getCantidadColores() {
 		return cantidadColores;
-	}
-	
-	
+	}	
 	
 	public Integer getCantidadNodos() {
 		return cantidadNodos;
 	}
 
-	
-
 	public Integer getCantidadAristas() {
 		return cantidadAristas;
 	}
-
-	
 
 	public Integer getMaximoGrado() {
 		return maximoGrado;
 	}
 
-	
-
 	public Integer getMinimoGrado() {
 		return minimoGrado;
 	}
-
-	
 
 	public Integer getPorcentajeAdyacencia() {
 		return porcentajeAdyacencia;
 	}
 
-
+	public ArrayList<Integer> getNodos() {
+		return nodos;
+	}
 	
-
 }

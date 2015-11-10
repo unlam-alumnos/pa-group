@@ -1,7 +1,8 @@
 package programaProbadorColoreo;
 
-import generadores.Grafo;
 import java.io.*;
+
+import trash.Grafo;
 
 public class ProgramaProbadorColoreo {
 
