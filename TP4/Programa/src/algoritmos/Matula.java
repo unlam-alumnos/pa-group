@@ -13,7 +13,7 @@ public class Matula extends Grafo {
 	public Matula(Grafo grafo) {
 		super(grafo);
 	}
-	
+
 	@Override
 	protected void mix() {
 		shuffle();

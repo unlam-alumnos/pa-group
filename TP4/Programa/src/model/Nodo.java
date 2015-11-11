@@ -40,34 +40,6 @@ public class Nodo implements Comparable<Nodo>{
 	public void addGrado(){
 		this.grado++;
 	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + color;
-		result = prime * result + grado;
-		result = prime * result + indice;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Nodo other = (Nodo) obj;
-		if (color != other.color)
-			return false;
-		if (grado != other.grado)
-			return false;
-		if (indice != other.indice)
-			return false;
-		return true;
-	}
 
 	@Override
 	public int compareTo(Nodo otro) {
