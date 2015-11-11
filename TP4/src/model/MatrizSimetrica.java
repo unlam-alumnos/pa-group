@@ -2,10 +2,13 @@ package model;
 
 
 public class MatrizSimetrica {
+	private int cantidadNodos;
 	private boolean vector[];
 	
 	public MatrizSimetrica(int cantNodos) {
-		this.vector = new boolean[cantNodos * 2];
+		int tam = (int)( Math.pow(cantNodos, 2) - cantNodos ) / 2;
+		this.cantidadNodos = cantNodos;
+		this.vector = new boolean[tam];
 		for (int i = 0; i < vector.length; i++) {
 			vector[i] = false;
 		}
@@ -19,7 +22,7 @@ public class MatrizSimetrica {
 	}
 	
 	public int getPosicionVector(int nodoOrigen, int nodoDestino){
-		return (int) (nodoOrigen * vector.length/2 + nodoDestino - ( Math.pow(nodoOrigen, 2) + 3 * nodoOrigen + 2) / 2);
+		return (int) (nodoOrigen * cantidadNodos + nodoDestino - ( Math.pow(nodoOrigen, 2) + 3 * nodoOrigen + 2) / 2);
 	}
 	
 	public boolean isAdyacentes(int nodoOrigen, int nodoDestino){

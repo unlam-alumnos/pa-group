@@ -48,11 +48,14 @@ public class Grafo {
 			archivo = new File(ruta);
 			fr = new FileReader(archivo);
 			br = new BufferedReader(fr);
+			String linea;
 			String[] data;
-
-			data = br.readLine().split(" ");
+			
+			linea = br.readLine();
+			
+			data = linea.split(" ");
 			cantidadNodos = Integer.parseInt(data[0]);
-			nodos = new Nodo[cantidadNodos + 1];
+			nodos = new Nodo[cantidadNodos];
 			cantidadAristas = Integer.parseInt(data[1]);
 			porcentajeAdyacencia = Integer.parseInt(data[2]);
 			gradoMaximo = Integer.parseInt(data[3]);
@@ -60,9 +63,10 @@ public class Grafo {
 			matrizAdyacencia = new MatrizSimetrica(cantidadNodos);
 			cantidadColores = cantidadNodos;
 
-			while ((data = br.readLine().split(" ")) != null) {
-				int nodoOrigen = Integer.parseInt(data[0]);
-				int nodoDestino = Integer.parseInt(data[1]);
+			while ((linea = br.readLine()) != null) {
+				data = linea.split(" ");
+				int nodoOrigen = Integer.parseInt(data[0]) - 1;
+				int nodoDestino = Integer.parseInt(data[1]) - 1;
 
 				if (nodos[nodoOrigen] == null) {
 					nodos[nodoOrigen] = new Nodo(nodoOrigen);
@@ -135,7 +139,7 @@ public class Grafo {
 					+ gradoMaximo + " " + gradoMinimo);
 
 			for (int i = 0; i < cantidadNodos; i++) {
-				sb.append(nodos[i].getIndice() + " " + nodos[i].getColor());
+				sb.append(nodos[i].getIndice() + " " + nodos[i].getColor() + "\n");
 			}
 
 			pw.println(sb.toString());
@@ -147,8 +151,30 @@ public class Grafo {
 		}
 	}
 
-	protected void colorear() {
+	public void colorear() {
+		int color = 0;
+		int nodosColoreados = 0;
+		
+		sort();
+		cleanNodos();
+		mix();
+
+		while (nodosColoreados < cantidadNodos) {
+			color++;
+			for (int indice = 0; indice < cantidadNodos; indice++) {
+				if (puedoColorear(indice, color)) {
+					nodos[indice].setColor(color);
+					nodosColoreados++;
+				}
+			}
+		}
+
+		cantidadColores = color;
 	}
+	
+	protected void mix() {}
+
+	protected void sort() {}
 
 	public boolean isAdyacentes(int nodoOrigen, int nodoDestino) {
 		return this.getMatrizAdyacencia().isAdyacentes(nodoOrigen, nodoDestino);
@@ -196,8 +222,8 @@ public class Grafo {
 		}
 
 		for (int i = 0; i < cantidadNodos; i++) {
-			if (nodos[i].getColor() == color) {
-				if (isAdyacentes(nodos[i].getIndice(), nodos[indice].getIndice())) {
+			if (i != indice && isAdyacentes(i, indice)) {
+				if (nodos[i].getColor() == color) {
 					return false;
 				}
 			}

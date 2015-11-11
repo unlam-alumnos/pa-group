@@ -13,26 +13,7 @@ public class SecuencialAleatorio extends Grafo {
 	}
 
 	@Override
-	public void colorear() {
-		int color = 0;
-		int nodosColoreados = 0;
-
-		cleanNodos();
+	protected void mix() {
 		shuffle(0, cantidadNodos - 1);
-		
-		while (nodosColoreados < cantidadNodos) {
-			color++;
-			for (int indice = 0; indice < cantidadNodos; indice++) {
-				if (nodos[indice].getColor() == 0
-						&& !(puedoColorear(nodos[indice].getIndice(), color))) {
-					nodos[indice].setColor(color);
-					nodosColoreados++;
-				}
-			}
-		}
-
-		if (color < cantidadColores) {
-			cantidadColores = color;
-		}
 	}
 }
