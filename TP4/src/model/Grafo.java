@@ -139,7 +139,7 @@ public class Grafo {
 					+ gradoMaximo + " " + gradoMinimo);
 
 			for (int i = 0; i < cantidadNodos; i++) {
-				sb.append(nodos[i].getIndice() + " " + nodos[i].getColor() + "\n");
+				sb.append(nodos[i].getIndice()+1 + " " + nodos[i].getColor() + "\n");
 			}
 
 			pw.println(sb.toString());
@@ -222,7 +222,7 @@ public class Grafo {
 		}
 
 		for (int i = 0; i < cantidadNodos; i++) {
-			if (i != indice && isAdyacentes(i, indice)) {
+			if (i != indice && isAdyacentes(nodos[i].getIndice(), nodos[indice].getIndice())) {
 				if (nodos[i].getColor() == color) {
 					return false;
 				}

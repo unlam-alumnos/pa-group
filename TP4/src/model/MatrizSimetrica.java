@@ -22,6 +22,11 @@ public class MatrizSimetrica {
 	}
 	
 	public int getPosicionVector(int nodoOrigen, int nodoDestino){
+		if (nodoOrigen > nodoDestino) {
+			int aux = nodoOrigen;
+			nodoOrigen = nodoDestino;
+			nodoDestino = aux;
+		}
 		return (int) (nodoOrigen * cantidadNodos + nodoDestino - ( Math.pow(nodoOrigen, 2) + 3 * nodoOrigen + 2) / 2);
 	}
 	

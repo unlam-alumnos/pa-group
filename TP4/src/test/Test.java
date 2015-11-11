@@ -6,10 +6,10 @@ public class Test {
 
 	public static void main(String[] args) {
 		
-		Matula grafo = new Matula("grafo.in");
+		Matula grafo = new Matula("LoteDePruebas\\IN\\pentagonoCompleto.in");
 		
 		grafo.colorear();
-		grafo.generarArchivoSalida("grafo.out");
+		grafo.generarArchivoSalida("LoteDePruebas\\OUT\\pentagonoCompleto.out");
 		
 	}
 }
