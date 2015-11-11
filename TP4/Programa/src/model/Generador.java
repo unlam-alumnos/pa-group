@@ -1,10 +1,18 @@
 package model;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.Random;
+
+
+import algoritmos.Matula;
 
 public class Generador extends Grafo {
 
 	public Generador() { }
+	
+	/*
 
 	private int buscarGradoMax() {
 		int grado = 0;
@@ -269,4 +277,72 @@ public class Generador extends Grafo {
 
 		return cantidades;
 	}
+
+*/
+
+	public void grafoDadoNYPorcentajeAdy(int cantidad, int porcentaje){		
+		
+		
+		cantidadNodos = cantidad;
+		porcentajeAdyacencia = porcentaje;
+		matrizAdyacencia = new MatrizSimetrica(cantidadNodos);
+		cantidadAristas = (int) ((cantidadNodos * (cantidadNodos - 1) / 2) * (porcentajeAdyacencia / 100));
+		
+		int[] vectorGrados = new int [cantidadNodos];
+		int aristasAux = cantidadAristas;
+
+		// cargo la matriz y aumento grado de los nodos
+		for (int i = 0; i < cantidadNodos; i++)
+			for (int j = i + 1; j < cantidadNodos; j++)
+				if (Math.random() * cantidadNodos < porcentajeAdyacencia&& aristasAux > 0) {
+					matrizAdyacencia.setNodo(i, j);
+					aristasAux--;
+					vectorGrados[i]++;
+					vectorGrados[j]++;
+				}
+		
+		Arrays.sort(vectorGrados);
+		
+		// escribo archivos de salida
+		FileWriter fichero = null;
+		PrintWriter pw = null;
+		try {
+			fichero = new FileWriter("Entrada.txt");
+			pw = new PrintWriter(fichero);
+
+			// primer linea
+			pw.println(cantidadNodos + " " + cantidadAristas + " " + porcentajeAdyacencia
+					+ " " + vectorGrados[cantidadNodos - 1] + " "
+					+ vectorGrados[0]);
+
+			for (int i = 0; i < cantidadNodos; i++)
+				for (int j = i + 1; j < cantidadNodos; j++) {
+					if (matrizAdyacencia.getNodo(i, j));
+						pw.println((i + 1) + " " + (j + 1));
+				}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (null != fichero)
+					fichero.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	
+	
+public static void main(String[] args) {
+	
+	Generador gen = new Generador();
+	gen.grafoDadoNYPorcentajeAdy(5, 100);
+	
+		
+		
+	}
+	
 }
+
+
