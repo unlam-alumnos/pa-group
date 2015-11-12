@@ -96,7 +96,7 @@ public class Grafo {
 		}
 	}
 
-	public void guardarGrafo(String ruta) {
+	public void exportar(String ruta) {
 		File archivo = null;
 		PrintWriter pw = null;
 		StringBuffer sb = null;
@@ -110,7 +110,7 @@ public class Grafo {
 			for (int i = 0; i < cantidadNodos; i++)
 				for (int j = i + 1; j < cantidadNodos; j++) {
 					if (matrizAdyacencia.isAdyacentes(i, j)) {
-						sb.append(i + " " + j + "\n");
+						sb.append((i+1) + " " + (j+1) + "\n");
 					}
 				}
 			pw.println(sb.toString());
