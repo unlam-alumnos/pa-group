@@ -8,8 +8,40 @@ public class Generador extends Grafo {
 	public Generador() {
 	}
 
-	public void grafoDadoNYProbAristas(int cantidad, double probabilidadAristas) {
+	private double factorial(int numero) {
+		double factorial = 1;
+		while (numero != 0) {
+			factorial = factorial * numero;
+			numero--;
+		}
+		return factorial;
+	}
+
+	public void grafoDadoNYProbAristas(int cantNodos, double probabilidadAristas) {
+		this.cantidadNodos = cantNodos;
+		this.matrizAdyacencia = new MatrizSimetrica(this.cantidadNodos);
+		this.cantidadAristas = 0;
+		int[] vectorGrados = new int[this.cantidadNodos];
+		Arrays.fill(vectorGrados, 0);
 		
+		for (int i = 0; i < cantNodos; i++) {
+			for (int j = i + 1; j < cantNodos; j++) {
+				if (!this.matrizAdyacencia.isAdyacentes(i, j)) {
+					if (Math.random() < probabilidadAristas) {
+						this.matrizAdyacencia.setNodo(i, j);
+						this.cantidadAristas++;
+						vectorGrados[i]++;
+						vectorGrados[j]++;
+					}
+				}
+			}
+		}
+		
+		Arrays.sort(vectorGrados);
+		this.gradoMaximo = vectorGrados[this.cantidadNodos - 1];
+		this.gradoMinimo = vectorGrados[0];
+		double aristasMaximas = factorial(cantNodos-1);
+		this.porcentajeAdyacencia = (int) (Math.rint(this.cantidadAristas/aristasMaximas));
 	}
 
 	public void grafoDadoNYPorcentajeAdy(int cantNodos, int porcentajeAdy) {
@@ -17,7 +49,9 @@ public class Generador extends Grafo {
 		this.cantidadNodos = cantNodos;
 		this.porcentajeAdyacencia = porcentajeAdy;
 		this.matrizAdyacencia = new MatrizSimetrica(this.cantidadNodos);
-		this.cantidadAristas = (int) (Math.rint((cantNodos * cantNodos - cantNodos) * 0.5 * (porcentajeAdy / 100.0)));
+		this.cantidadAristas = (int) (Math
+				.rint((cantNodos * cantNodos - cantNodos) * 0.5
+						* (porcentajeAdy / 100.0)));
 
 		int[] vectorGrados = new int[this.cantidadNodos];
 		Arrays.fill(vectorGrados, 0);
@@ -34,11 +68,11 @@ public class Generador extends Grafo {
 							vectorGrados[j]++;
 						}
 					}
-					if (aristasAplicadas == this.cantidadAristas){
+					if (aristasAplicadas == this.cantidadAristas) {
 						break;
 					}
 				}
-				if (aristasAplicadas == this.cantidadAristas){
+				if (aristasAplicadas == this.cantidadAristas) {
 					break;
 				}
 			}
@@ -63,7 +97,8 @@ public class Generador extends Grafo {
 
 	public static void main(String[] args) {
 		Generador generador = new Generador();
-		generador.grafoDadoNYPorcentajeAdy(4, 66);
+		//generador.grafoDadoNYPorcentajeAdy(4, 66);
+		//generador.grafoDadoNYProbAristas(4,0.5);
 		generador.exportar("GrafoPrueba.in");
 	}
 }
