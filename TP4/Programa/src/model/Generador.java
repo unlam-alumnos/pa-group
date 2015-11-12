@@ -1,6 +1,8 @@
 package model;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class Generador extends Grafo {
@@ -23,12 +25,10 @@ public class Generador extends Grafo {
 		initNodos();
 		this.matrizAdyacencia = new MatrizSimetrica(this.cantidadNodos);
 		this.cantidadAristas = 0;
-		int[] vectorGrados = new int[this.cantidadNodos];
-		Arrays.fill(vectorGrados, 0);
-		
+
 		for (int i = 0; i < cantNodos; i++) {
 			for (int j = i + 1; j < cantNodos; j++) {
-				if (!this.matrizAdyacencia.isAdyacentes(i, j)) {
+				if (!isAdyacentes(i, j)) {
 					if (Math.random() < probabilidadAristas) {
 						nodos[i].addGrado();
 						nodos[j].addGrado();
@@ -38,13 +38,13 @@ public class Generador extends Grafo {
 				}
 			}
 		}
-		
+
 		Arrays.sort(nodos);
 		this.gradoMaximo = nodos[this.cantidadNodos - 1].getGrado();
 		this.gradoMinimo = nodos[0].getGrado();
-		
-		double aristasMaximas = factorial(cantNodos-1);
-		this.porcentajeAdyacencia = (int) (Math.rint(this.cantidadAristas/aristasMaximas));
+
+		double aristasMaximas = factorial(cantNodos - 1);
+		this.porcentajeAdyacencia = (int) (Math.rint((this.cantidadAristas/ aristasMaximas) * 100.0));
 	}
 
 	public void grafoDadoNYPorcentajeAdy(int cantNodos, int porcentajeAdy) {
@@ -62,7 +62,7 @@ public class Generador extends Grafo {
 		while (aristasAplicadas != this.cantidadAristas) {
 			for (int i = 0; i < cantNodos; i++) {
 				for (int j = i + 1; j < cantNodos; j++) {
-					if (!this.matrizAdyacencia.isAdyacentes(i, j)) {
+					if (!isAdyacentes(i, j)) {
 						if (rand.nextInt(2) == 1) {
 							nodos[i].addGrado();
 							nodos[j].addGrado();
@@ -85,8 +85,76 @@ public class Generador extends Grafo {
 		this.gradoMinimo = nodos[0].getGrado();
 	}
 
-	public void grafoRegularDadoNYGrado(int cantNodos, int grado) {
+	public void grafoRegularDadoNYGrado(int cantNodos, int gradoRegular) {
+		Random random = new Random();
+		this.cantidadNodos = cantNodos;
+		this.nodos = new Nodo[cantNodos];
+		initNodos();
+		this.matrizAdyacencia = new MatrizSimetrica(cantNodos);
+		this.gradoMaximo = gradoRegular;
+		this.gradoMinimo = gradoRegular;
+		this.cantidadAristas = 0;
 
+		// Condiciones para que G(N, k) sea k-regular:
+        // 1. k + 1 <= N.
+        // 2. N * k par.
+		if (gradoRegular + 1 > cantNodos) {
+			System.err.println("No se puede generar un grafor " + gradoRegular + "-regular de " + cantNodos + " nodos.");
+			System.exit(-1);
+		}
+		if (cantNodos * gradoRegular % 2 != 0) {
+			System.err.println("No se puede generar un grafor " + gradoRegular + "-regular de " + cantNodos + " nodos.");
+			System.exit(-1);
+		}
+		if (gradoRegular != 0) {
+			while (!esKRegular(gradoRegular)) {
+				
+				Map<Integer, Nodo> nodosAux = new HashMap<Integer, Nodo>();
+				
+				for (int i = 0; i < nodos.length; i++) {
+					nodosAux.put(nodos[i].getIndice(), new Nodo(nodos[i].getIndice(),0,0));
+				}
+				
+				while (!nodosAux.isEmpty()) {
+					
+					// Tomamos dos índices distintos al azar de dicha lista
+					int indice1 = random.nextInt(nodos.length);
+					int indice2 = random.nextInt(nodos.length);
+					while (indice1 == indice2) {
+						indice1 = random.nextInt(nodosAux.size());
+						indice2 = random.nextInt(nodosAux.size());
+					}
+
+					// Con dichos índices obtenemos un par de nodos
+					Nodo nodoOrigen = nodos[indice1];
+					Nodo nodoDestino = nodos[indice2];
+
+					if (nodoOrigen.getIndice() != nodoDestino.getIndice()) {
+						if (nodoOrigen.getGrado() < gradoRegular && nodoDestino.getGrado() < gradoRegular) {
+							if (!isAdyacentes(nodoOrigen.getIndice(), nodoDestino.getIndice())) {
+
+								this.matrizAdyacencia.setNodo(nodoOrigen.getIndice(), nodoDestino.getIndice());
+								this.cantidadAristas++;
+								nodos[nodoOrigen.getIndice()].addGrado();
+								nodos[nodoDestino.getIndice()].addGrado();
+								nodosAux.get(indice1).addGrado();
+								nodosAux.get(indice2).addGrado();
+								
+								if (nodosAux.get(indice1).getGrado() == gradoRegular) {
+									nodosAux.remove(indice1);
+								}
+								if (nodosAux.get(indice2).getGrado() == gradoRegular) {
+									nodosAux.remove(indice2);
+								}	
+							}
+						}
+					}
+				}
+			}
+		}		
+
+		double aristasMaximas = factorial(cantNodos - 1);
+		this.porcentajeAdyacencia = (int) (Math.rint((this.cantidadAristas/ aristasMaximas) * 100.0));
 	}
 
 	public void grafoRegularDadoNYPorcentajeAdy(int cantNodos, int porcentajeAdy) {
@@ -99,8 +167,9 @@ public class Generador extends Grafo {
 
 	public static void main(String[] args) {
 		Generador generador = new Generador();
-		generador.grafoDadoNYPorcentajeAdy(4, 66);
+		//generador.grafoDadoNYPorcentajeAdy(4, 66);
 		//generador.grafoDadoNYProbAristas(4,0.5);
+		//generador.grafoRegularDadoNYGrado(6, 3);
 		generador.exportar("GrafoPrueba.in");
 	}
 }

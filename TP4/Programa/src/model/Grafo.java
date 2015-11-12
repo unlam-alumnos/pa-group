@@ -178,6 +178,15 @@ public class Grafo {
 		cantidadColores = color;
 	}
 	
+	protected boolean esKRegular(int grado) {
+		for (int i = 0; i < cantidadNodos; i++) {
+		        if(nodos[i].getGrado() != grado) {
+		                return false;
+		        }
+		}		
+		return true;
+	}
+	
 	protected void mix() {}
 
 	protected void sort() {}
