@@ -107,6 +107,8 @@ public class Generador extends Grafo {
 			System.exit(-1);
 		}
 		if (gradoRegular != 0) {
+			
+			// Por las dudas chequeo que el grafo que me quedo formado sea Regular
 			while (!esKRegular(gradoRegular)) {
 				
 				Map<Integer, Nodo> nodosAux = new HashMap<Integer, Nodo>();
@@ -115,21 +117,23 @@ public class Generador extends Grafo {
 					nodosAux.put(nodos[i].getIndice(), new Nodo(nodos[i].getIndice(),0,0));
 				}
 				
+				// Mientras tenga nodos por analizar en el Map
 				while (!nodosAux.isEmpty()) {
 					
-					// Tomamos dos índices distintos al azar de dicha lista
+					// Tomamos dos indices distintos al azar de dicha lista
 					int indice1 = random.nextInt(nodos.length);
 					int indice2 = random.nextInt(nodos.length);
 					while (indice1 == indice2) {
-						indice1 = random.nextInt(nodosAux.size());
-						indice2 = random.nextInt(nodosAux.size());
+						indice1 = random.nextInt(nodos.length);
+						indice2 = random.nextInt(nodos.length);
 					}
 
-					// Con dichos índices obtenemos un par de nodos
+					// Con dichos indices obtenemos un par de nodos
 					Nodo nodoOrigen = nodos[indice1];
 					Nodo nodoDestino = nodos[indice2];
 
 					if (nodoOrigen.getIndice() != nodoDestino.getIndice()) {
+						// Si esos nodos todavia tienen grado menor a regular los analizo
 						if (nodoOrigen.getGrado() < gradoRegular && nodoDestino.getGrado() < gradoRegular) {
 							if (!isAdyacentes(nodoOrigen.getIndice(), nodoDestino.getIndice())) {
 
@@ -140,6 +144,7 @@ public class Generador extends Grafo {
 								nodosAux.get(indice1).addGrado();
 								nodosAux.get(indice2).addGrado();
 								
+								// Chequeo si alguno de los nodos llego al grado maximo y en ese caso lo quito del Map
 								if (nodosAux.get(indice1).getGrado() == gradoRegular) {
 									nodosAux.remove(indice1);
 								}
@@ -158,7 +163,8 @@ public class Generador extends Grafo {
 	}
 
 	public void grafoRegularDadoNYPorcentajeAdy(int cantNodos, int porcentajeAdy) {
-
+		int aux = (int) ((Math.rint((cantNodos * cantNodos - cantNodos) * 0.5* (porcentajeAdy / 100.0))) / 2);
+		grafoRegularDadoNYGrado(cantNodos,aux);
 	}
 
 	public void grafoNPartito(int cantNodos, int partes) {
@@ -170,6 +176,7 @@ public class Generador extends Grafo {
 		//generador.grafoDadoNYPorcentajeAdy(4, 66);
 		//generador.grafoDadoNYProbAristas(4,0.5);
 		//generador.grafoRegularDadoNYGrado(6, 3);
+		//generador.grafoRegularDadoNYPorcentajeAdy(6, 50);
 		generador.exportar("GrafoPrueba.in");
 	}
 }
