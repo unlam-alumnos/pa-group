@@ -1,11 +1,13 @@
 package model;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class Generador extends Grafo {
+public class Generador extends GrafoNDNP {
 
 	public Generador() {
 	}
@@ -190,6 +192,35 @@ public class Generador extends Grafo {
 			System.err.println("No se puede generar un grafo " + partes + "-partito.");
 		}
 	}
+	
+	public void exportarGrafo(String ruta) {
+		File archivo = null;
+		PrintWriter pw = null;
+		StringBuffer sb = null;
+		try {
+			archivo = new File(ruta);
+			pw = new PrintWriter(archivo);
+			sb = new StringBuffer();
+			pw.println(cantidadNodos + " " + cantidadAristas + " "
+					+ porcentajeAdyacencia + " " + gradoMaximo + " "
+					+ gradoMinimo);
+			for (int i = 0; i < cantidadNodos; i++)
+				for (int j = i + 1; j < cantidadNodos; j++) {
+					if (matrizAdyacencia.isAdyacentes(i, j)) {
+						sb.append((i+1) + " " + (j+1) + "\n");
+					}
+				}
+			pw.println(sb.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pw.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 	public static void main(String[] args) {
 		Generador generador = new Generador();
@@ -198,6 +229,6 @@ public class Generador extends Grafo {
 		//generador.grafoRegularDadoNYGrado(6, 3);
 		//generador.grafoRegularDadoNYPorcentajeAdy(6, 50);
 		generador.grafoNPartito(6, 2);
-		generador.exportar("GrafoPrueba.in");
+		generador.exportarGrafo("GrafoPrueba.in");
 	}
 }

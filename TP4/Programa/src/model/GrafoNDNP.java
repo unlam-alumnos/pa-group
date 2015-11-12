@@ -4,8 +4,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.Collections;
 
-public class Grafo {
+public class GrafoNDNP {
 
 	protected Integer cantidadNodos;
 	protected Integer cantidadAristas;
@@ -16,10 +18,10 @@ public class Grafo {
 	protected Integer gradoMaximo;
 	protected Integer cantidadColores;
 
-	public Grafo() {
+	public GrafoNDNP() {
 	}
 
-	public Grafo(Integer cantidadNodos, Nodo[] nodos, Integer cantidadAristas,
+	public GrafoNDNP(Integer cantidadNodos, Nodo[] nodos, Integer cantidadAristas,
 			Integer porcentajeAdyacencia, Integer gradoMinimo,
 			Integer gradoMaximo, MatrizSimetrica matrizAdyacencia) {
 		this.cantidadNodos = cantidadNodos;
@@ -32,14 +34,14 @@ public class Grafo {
 		this.cantidadColores = cantidadNodos;		
 	}
 
-	public Grafo(Grafo otro) {
+	public GrafoNDNP(GrafoNDNP otro) {
 		this(otro.getCantidadNodos(), otro.getNodosArray(), otro
 				.getCantidadAristas(), otro.getPorcentajeAdyacencia(), otro
 				.getGradoMinimo(), otro.getGradoMaximo(), otro
 				.getMatrizAdyacencia());
 	}
 
-	public Grafo(String ruta) {
+	public GrafoNDNP(String ruta) {
 		File archivo = null;
 		FileReader fr = null;
 		BufferedReader br = null;
@@ -96,36 +98,7 @@ public class Grafo {
 		}
 	}
 
-	public void exportar(String ruta) {
-		File archivo = null;
-		PrintWriter pw = null;
-		StringBuffer sb = null;
-		try {
-			archivo = new File(ruta);
-			pw = new PrintWriter(archivo);
-			sb = new StringBuffer();
-			pw.println(cantidadNodos + " " + cantidadAristas + " "
-					+ porcentajeAdyacencia + " " + gradoMaximo + " "
-					+ gradoMinimo);
-			for (int i = 0; i < cantidadNodos; i++)
-				for (int j = i + 1; j < cantidadNodos; j++) {
-					if (matrizAdyacencia.isAdyacentes(i, j)) {
-						sb.append((i+1) + " " + (j+1) + "\n");
-					}
-				}
-			pw.println(sb.toString());
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				pw.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	public void generarArchivoSalida(String ruta) {
+	public void exportarResultado(String ruta) {
 		File archivo = null;
 		PrintWriter pw = null;
 		StringBuffer sb = null;
@@ -157,40 +130,12 @@ public class Grafo {
 		}
 	}
 
-	public void colorear() {
-		int color = 0;
-		int nodosColoreados = 0;
-		
-		sort();
-		cleanNodos();
-		mix();
-
-		while (nodosColoreados < cantidadNodos) {
-			color++;
-			for (int indice = 0; indice < cantidadNodos; indice++) {
-				if (puedoColorear(indice, color)) {
-					nodos[indice].setColor(color);
-					nodosColoreados++;
-				}
-			}
+	public void cleanNodos() {
+		for (int i = 0; i < nodos.length; i++) {
+			nodos[i].clean();
 		}
-
-		cantidadColores = color;
 	}
 	
-	protected boolean esKRegular(int grado) {
-		for (int i = 0; i < cantidadNodos; i++) {
-		        if(nodos[i].getGrado() != grado) {
-		                return false;
-		        }
-		}		
-		return true;
-	}
-	
-	protected void mix() {}
-
-	protected void sort() {}
-
 	public boolean isAdyacentes(int nodoOrigen, int nodoDestino) {
 		return this.getMatrizAdyacencia().isAdyacentes(nodoOrigen, nodoDestino);
 	}
@@ -225,12 +170,6 @@ public class Grafo {
 		}
 	}
 
-	public void cleanNodos() {
-		for (int i = 0; i < nodos.length; i++) {
-			nodos[i].clean();
-		}
-	}
-
 	public boolean puedoColorear(int indice, int color) {
 		if (nodos[indice].getColor() != 0) {
 			return false;
@@ -244,6 +183,50 @@ public class Grafo {
 			}
 		}
 
+		return true;
+	}
+
+	private void colorear() {
+		int color = 0;
+		int nodosColoreados = 0;
+		cleanNodos();
+
+		while (nodosColoreados < cantidadNodos) {
+			color++;
+			for (int indice = 0; indice < cantidadNodos; indice++) {
+				if (puedoColorear(indice, color)) {
+					nodos[indice].setColor(color);
+					nodosColoreados++;
+				}
+			}
+		}
+
+		cantidadColores = color;
+	}
+	
+	public void coloreoSecuencialAleatorio(){
+		shuffle(0, cantidadNodos - 1);
+		colorear();
+	}
+	
+	public void coloreoMatula(){
+		Arrays.sort(this.nodos);
+		shuffle();
+		colorear();
+	}
+	
+	public void coloreoWelshPowell(){
+		Arrays.sort(this.nodos, Collections.reverseOrder());
+		shuffle();
+		colorear();
+	}
+	
+	protected boolean esKRegular(int grado) {
+		for (int i = 0; i < cantidadNodos; i++) {
+	        if(nodos[i].getGrado() != grado) {
+	            return false;
+	        }
+		}		
 		return true;
 	}
 

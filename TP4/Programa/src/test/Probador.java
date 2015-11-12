@@ -1,14 +1,15 @@
 
 package test;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 
-import model.Grafo;
-import model.MatrizSimetrica;
+import model.GrafoNDNP;
 import model.Nodo;
 
 public class Probador {
-	private Grafo grafo;
+	private GrafoNDNP grafo;
 	
 	private Integer cantNodosSal;
 	private Integer cantidadColoresSal;
@@ -32,7 +33,7 @@ public class Probador {
 		
 		
 		try { 
-			grafo = new Grafo (grafoEntrada);
+			grafo = new GrafoNDNP (grafoEntrada);
 			fr = new FileReader(salida);
 			br = new BufferedReader(fr);
 			linea = br.readLine();
@@ -125,17 +126,19 @@ public class Probador {
 				
 			}
 		
-		//Verificar que los nodos del mismo color, no tienen aristas que los unan
+		// Verificar que los nodos del mismo color, no tienen aristas que los unan
 		
 		
 		
 		
+		/**
+		 * TODO: falta terminar
+		 * */
 		
 		
 		
 		
-		
-		//return true
+		return true;
 	}
 	
 	
