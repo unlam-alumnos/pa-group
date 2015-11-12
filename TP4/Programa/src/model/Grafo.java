@@ -150,6 +150,12 @@ public class Grafo {
 				pw.close();
 		}
 	}
+	
+	public void initNodos(){
+		for (int i = 0; i < nodos.length; i++) {
+			nodos[i] = new Nodo(i, 0, 0);
+		}
+	}
 
 	public void colorear() {
 		int color = 0;
