@@ -99,11 +99,11 @@ public class Generador extends Grafo {
         // 1. k + 1 <= N.
         // 2. N * k par.
 		if (gradoRegular + 1 > cantNodos) {
-			System.err.println("No se puede generar un grafor " + gradoRegular + "-regular de " + cantNodos + " nodos.");
+			System.err.println("No se puede generar un grafo " + gradoRegular + "-regular de " + cantNodos + " nodos.");
 			System.exit(-1);
 		}
 		if (cantNodos * gradoRegular % 2 != 0) {
-			System.err.println("No se puede generar un grafor " + gradoRegular + "-regular de " + cantNodos + " nodos.");
+			System.err.println("No se puede generar un grafo " + gradoRegular + "-regular de " + cantNodos + " nodos.");
 			System.exit(-1);
 		}
 		if (gradoRegular != 0) {
@@ -168,7 +168,27 @@ public class Generador extends Grafo {
 	}
 
 	public void grafoNPartito(int cantNodos, int partes) {
+		if (partes >= 1) {
+			
+			this.cantidadNodos = cantNodos;
+			this.nodos = new Nodo[cantNodos];
+			initNodos();
+			this.matrizAdyacencia = new MatrizSimetrica(cantNodos);
+			this.cantidadAristas = 0;
+			
 
+			// TODO: Algoritmo de generacion
+			
+			
+			double aristasMaximas = factorial(cantNodos - 1);
+			this.porcentajeAdyacencia = (int) (Math.rint((this.cantidadAristas/ aristasMaximas) * 100.0));
+			Arrays.sort(nodos);
+			this.gradoMaximo = nodos[this.cantidadNodos - 1].getGrado();
+			this.gradoMinimo = nodos[0].getGrado();
+			
+		}else{
+			System.err.println("No se puede generar un grafo " + partes + "-partito.");
+		}
 	}
 
 	public static void main(String[] args) {
@@ -177,6 +197,7 @@ public class Generador extends Grafo {
 		//generador.grafoDadoNYProbAristas(4,0.5);
 		//generador.grafoRegularDadoNYGrado(6, 3);
 		//generador.grafoRegularDadoNYPorcentajeAdy(6, 50);
+		generador.grafoNPartito(6, 2);
 		generador.exportar("GrafoPrueba.in");
 	}
 }
