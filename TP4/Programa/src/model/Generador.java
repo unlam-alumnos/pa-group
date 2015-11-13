@@ -224,11 +224,11 @@ public class Generador extends GrafoNDNP {
 
 	public static void main(String[] args) {
 		Generador generador = new Generador();
-		//generador.grafoDadoNYPorcentajeAdy(4, 66);
+		//generador.grafoDadoNYPorcentajeAdy(600, 90);
 		//generador.grafoDadoNYProbAristas(4,0.5);
 		//generador.grafoRegularDadoNYGrado(6, 3);
-		//generador.grafoRegularDadoNYPorcentajeAdy(6, 50);
-		generador.grafoNPartito(6, 2);
-		generador.exportarGrafo("GrafoPrueba.in");
+		generador.grafoRegularDadoNYPorcentajeAdy(1000, 50);
+		//generador.grafoNPartito(6, 2);
+		generador.exportarGrafo("grafoRegular_1000_50ady.in");
 	}
 }

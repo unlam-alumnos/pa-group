@@ -257,4 +257,8 @@ public class GrafoNDNP {
 	public Nodo[] getNodosArray() {
 		return nodos;
 	}
+
+	public Integer getCantidadColores() {
+		return cantidadColores;
+	}
 }
