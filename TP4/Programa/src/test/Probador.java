@@ -127,17 +127,20 @@ public class Probador {
 			}
 		
 		// Verificar que los nodos del mismo color, no tienen aristas que los unan
-		
-		
-		
-		
-		/**
-		 * TODO: falta terminar
-		 * */
-		
-		
-		
-		
+		for (int i = 0; i <cantNodosSal; i++) {
+			int aux = i;
+			while (nodosSal[aux+1].getColor()!=nodosSal[i].getColor()) {
+				
+				aux++;
+				if (grafo.isAdyacentes(nodosSal[i].getIndice(), nodosSal[aux].getIndice())){
+					System.out.println("Existen nodos del mismo color, conectados por una arista");
+					return false;
+				}
+											
+			}
+						
+		}
+				
 		return true;
 	}
 	
