@@ -127,7 +127,7 @@ public class Probador {
 			}
 		
 		// Verificar que los nodos del mismo color, no tienen aristas que los unan
-		for (int i = 0; i <cantNodosSal; i++) {
+		for (int i = 0; i <cantNodosSal-1; i++) {
 			int aux = i;
 			while (nodosSal[aux+1].getColor()!=nodosSal[i].getColor()) {
 				
