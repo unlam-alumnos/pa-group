@@ -111,7 +111,7 @@ public class Generador extends GrafoNDNP {
 		if (gradoRegular != 0) {
 			
 			// Por las dudas chequeo que el grafo que me quedo formado sea Regular
-			while (!esKRegular(gradoRegular)) {
+			while (!isRegular(gradoRegular)) {
 				
 				Map<Integer, Nodo> nodosAux = new HashMap<Integer, Nodo>();
 				

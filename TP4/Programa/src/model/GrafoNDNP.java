@@ -221,7 +221,7 @@ public class GrafoNDNP {
 		colorear();
 	}
 	
-	protected boolean esKRegular(int grado) {
+	protected boolean isRegular(int grado) {
 		for (int i = 0; i < cantidadNodos; i++) {
 	        if(nodos[i].getGrado() != grado) {
 	            return false;
