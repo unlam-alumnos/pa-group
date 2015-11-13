@@ -45,7 +45,7 @@ public class Probador {
 			porcentajeAdyacenciaSal= Integer.parseInt(lineaSplitted[3]);
 			gradoMaximoSal= Integer.parseInt(lineaSplitted[4]);
 			gradoMinimoSal= Integer.parseInt(lineaSplitted[5]);
-			
+			nodosSal = new Nodo[cantNodosSal];
 			
 			
 			for (int i = 0; i < cantNodosSal; i++) {
@@ -119,7 +119,7 @@ public class Probador {
 			
 		}
 		
-		for (int i = 0; i < cantNodosSal; i++)
+		for (int i = 0; i < cantidadColoresSal; i++)
 			if(vectorColores[i] !=1){
 				System.out.println("No se han usado la cantidad de colores que se indican en la salida");
 				return false;	
@@ -129,10 +129,13 @@ public class Probador {
 		// Verificar que los nodos del mismo color, no tienen aristas que los unan
 		for (int i = 0; i <cantNodosSal-1; i++) {
 			int aux = i;
-			while (nodosSal[aux+1].getColor()!=nodosSal[i].getColor()) {
+			while (nodosSal[aux+1].getColor()==nodosSal[i].getColor()) {
 				
 				aux++;
-				if (grafo.isAdyacentes(nodosSal[i].getIndice(), nodosSal[aux].getIndice())){
+				
+				
+				//Hay que decrementar los indices siguientes para adaptarlos a la matriz de adyacencia (nuestro indices no toman en cuenta los ceros, pero MatrizSimetrica si)
+				if (grafo.getMatrizAdyacencia().isAdyacentes(nodosSal[i].getIndice()-1, nodosSal[aux].getIndice()-1)){
 					System.out.println("Existen nodos del mismo color, conectados por una arista");
 					return false;
 				}

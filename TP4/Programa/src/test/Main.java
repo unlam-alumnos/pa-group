@@ -5,11 +5,11 @@ import model.GrafoNDNP;
 public class Main {
 
 	final static String DIR_IN = "../LoteDePruebas/IN/";
-	final static String DIR_OUT = "../LoteDePruebas/OUT/";
+	final static String DIR_OUT = "../LoteDePruebas/OUT";
 	final static String FILE_NAME = "camino";
 
 	public static void main(String[] args) {
-		
+		/*
 		String pathDeEntrada = DIR_IN + FILE_NAME + ".in";
 		String pathDeSalidaAleatorio = DIR_OUT + "SecuencialAleatorio/" + FILE_NAME + ".out";
 		String pathDeSalidaMatula = DIR_OUT + "Matula/" + FILE_NAME + ".out";
@@ -25,6 +25,14 @@ public class Main {
 
 		grafo.coloreoWelshPowell();
 		grafo.exportarResultado(pathDeSalidaWelshPowell);
-
+		*/
+		
+		Probador probador = new Probador("../LoteDePruebas/IN/camino.in","../LoteDePruebas/OUT/Matula/camino.out");
+		if(probador.pruebaOK())
+			System.out.println("TODO OK");
+		
+		
+		
+		
 	}
 }
