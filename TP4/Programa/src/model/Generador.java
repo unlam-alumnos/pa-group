@@ -3,8 +3,6 @@ package model;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 public class Generador extends GrafoNDNP {
@@ -143,9 +141,35 @@ public class Generador extends GrafoNDNP {
 			initNodos();
 			this.matrizAdyacencia = new MatrizSimetrica(cantNodos);
 			this.cantidadAristas = 0;
+			boolean nodosRestantes = false;
 			
-
-			// TODO: Algoritmo de generacion
+			int nodosPorParte = cantNodos/partes;
+			nodosRestantes = cantNodos%partes != 0;
+			
+			int ini = 0;
+			int fin = nodosPorParte-1;
+			
+			for (int i = ini; i < nodos.length; i++) {
+				for (int j = 0; j < nodos.length; j++) {
+					if (i != j) {
+						if (!(j <= fin && j >= ini)) {
+							if (!isAdyacentes(nodos[i].getIndice(), nodos[j].getIndice())) {
+								this.matrizAdyacencia.setNodo(nodos[i].getIndice(), nodos[j].getIndice());
+								this.cantidadAristas++;
+								nodos[i].addGrado();
+								nodos[j].addGrado();													
+							}
+						}
+					}
+				}
+				if (i == fin) {
+					ini = fin+1;
+					fin += nodosPorParte;
+					if (nodosRestantes && fin == (nodos.length - 2)) {
+						fin++;
+					}
+				}
+			}
 			
 			
 			double aristasMaximas = factorial(cantNodos - 1);
@@ -193,14 +217,14 @@ public class Generador extends GrafoNDNP {
 		//generador.grafoDadoNYPorcentajeAdy(600, 90);
 		//generador.grafoDadoNYProbAristas(4,0.5);
 		//generador.grafoRegularDadoNYGrado(100, 50);
-		//generador.grafoNPartito(6, 2);
-		//generador.exportarGrafo("grafo.in");
-		
+		generador.grafoNPartito(6, 4);
+		generador.exportarGrafo("grafo.in");
+		/*
 		generador.grafoRegularDadoNYPorcentajeAdy(1000, 50);
 		generador.exportarGrafo("grafoRegular_1000_50ady.in");
 
 		generador.grafoRegularDadoNYPorcentajeAdy(1000, 75);
 		generador.exportarGrafo("grafoRegular_1000_75ady.in");
-
+		*/
 	}
 }
