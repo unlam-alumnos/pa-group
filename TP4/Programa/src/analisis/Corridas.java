@@ -7,11 +7,11 @@ import java.util.Arrays;
 import model.GrafoNDNP;
 
 public class Corridas {
-	final static String FILE_NAME = "grafoRegular_1000_50ady";
+	final static String FILE_NAME = "grafoRegular_1000_75ady";
 	final static String DIR_OUT = "src/analisis/OUT/";
 	final static String DIR_IN = "src/analisis/IN/";
 	final static String DIR_PLOT = "src/analisis/PLOT/";
-	final static int corridas = 10000; 
+	final static int corridas = 1000; 
 			
 	public static void main(String[] args) {
 		GrafoNDNP grafo = new GrafoNDNP(DIR_IN + FILE_NAME + ".in");
