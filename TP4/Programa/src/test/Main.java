@@ -9,7 +9,7 @@ public class Main {
 	final static String FILE_NAME = "camino";
 
 	public static void main(String[] args) {
-		/*
+		
 		String pathDeEntrada = DIR_IN + FILE_NAME + ".in";
 		String pathDeSalidaAleatorio = DIR_OUT + "SecuencialAleatorio/" + FILE_NAME + ".out";
 		String pathDeSalidaMatula = DIR_OUT + "Matula/" + FILE_NAME + ".out";
@@ -24,11 +24,6 @@ public class Main {
 		grafo.exportarResultado(pathDeSalidaMatula);
 
 		grafo.coloreoWelshPowell();
-		grafo.exportarResultado(pathDeSalidaWelshPowell);
-		*/
-		
-		Probador probador = new Probador("grafo_600_90ady.in","grafo_600_90ady.out");
-		if(probador.pruebaOK())
-			System.out.println("TODO OK");		
+		grafo.exportarResultado(pathDeSalidaWelshPowell);	
 	}
 }
