@@ -27,12 +27,8 @@ public class Main {
 		grafo.exportarResultado(pathDeSalidaWelshPowell);
 		*/
 		
-		Probador probador = new Probador("../LoteDePruebas/IN/camino.in","../LoteDePruebas/OUT/Matula/camino.out");
+		Probador probador = new Probador("grafo_600_90ady.in","grafo_600_90ady.out");
 		if(probador.pruebaOK())
-			System.out.println("TODO OK");
-		
-		
-		
-		
+			System.out.println("TODO OK");		
 	}
 }

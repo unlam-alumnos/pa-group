@@ -74,29 +74,29 @@ public class Probador {
 	public boolean pruebaOK(){
 		//Verificar que los datos de entrada y de salida son los mismos
 		
-		if(cantNodosSal != grafo.getCantidadNodos()){
+		if(!cantNodosSal.equals(grafo.getCantidadNodos())){
+			System.out.println(cantNodosSal + " " + grafo.getCantidadNodos());
 			System.out.println("No concuerda la cantidad de nodos de la entrada con la Salida");
 			return false;
 		}
-		if(cantidadAristasSal!= grafo.getCantidadAristas()){
+		if(!cantidadAristasSal.equals(grafo.getCantidadAristas())){
 			System.out.println("No concuerda la cantidad de aristas de la entrada con la Salida");
 			return false;
 		}
 		
-		if(porcentajeAdyacenciaSal!= grafo.getPorcentajeAdyacencia()){
+		if(!porcentajeAdyacenciaSal.equals(grafo.getPorcentajeAdyacencia())){
 			System.out.println("No concuerda el porcentaje de adyacencia de la entrada con la Salida");
 			return false;
 		}
 		
-		if(gradoMaximoSal!= grafo.getGradoMaximo()){
+		if(!gradoMaximoSal.equals(grafo.getGradoMaximo())){
 			System.out.println("No concuerda el grado maximo de la entrada con la Salida");
 			return false;
 		
 		}
-		if(gradoMinimoSal!= grafo.getGradoMinimo()){
+		if(!gradoMinimoSal.equals(grafo.getGradoMinimo())){
 			System.out.println("No concuerda el grado minimo de la entrada con la Salida");
 			return false;
-		
 		}
 		
 		
@@ -127,9 +127,9 @@ public class Probador {
 			}
 		
 		// Verificar que los nodos del mismo color, no tienen aristas que los unan
-		for (int i = 0; i <cantNodosSal-1; i++) {
+		for (int i = 0; i < (cantNodosSal-1); i++) {
 			int aux = i;
-			while (nodosSal[aux+1].getColor()==nodosSal[i].getColor()) {
+			while (aux < (cantNodosSal-1) && nodosSal[aux+1].getColor()==nodosSal[i].getColor() ) {
 				
 				aux++;
 				

@@ -88,7 +88,6 @@ public class Generador extends GrafoNDNP {
 	}
 
 	public void grafoRegularDadoNYGrado(int cantNodos, int gradoRegular) {
-		Random random = new Random();
 		this.cantidadNodos = cantNodos;
 		this.nodos = new Nodo[cantNodos];
 		initNodos();
@@ -110,51 +109,18 @@ public class Generador extends GrafoNDNP {
 		}
 		if (gradoRegular != 0) {
 			
-			// Por las dudas chequeo que el grafo que me quedo formado sea Regular
-			while (!isRegular(gradoRegular)) {
-				
-				Map<Integer, Nodo> nodosAux = new HashMap<Integer, Nodo>();
-				
-				for (int i = 0; i < nodos.length; i++) {
-					nodosAux.put(nodos[i].getIndice(), new Nodo(nodos[i].getIndice(),0,0));
-				}
-				
-				// Mientras tenga nodos por analizar en el Map
-				while (!nodosAux.isEmpty()) {
-					
-					// Tomamos dos indices distintos al azar de dicha lista
-					int indice1 = random.nextInt(nodos.length);
-					int indice2 = random.nextInt(nodos.length);
-					while (indice1 == indice2) {
-						indice1 = random.nextInt(nodos.length);
-						indice2 = random.nextInt(nodos.length);
-					}
-
-					// Con dichos indices obtenemos un par de nodos
-					Nodo nodoOrigen = nodos[indice1];
-					Nodo nodoDestino = nodos[indice2];
-
-					if (nodoOrigen.getIndice() != nodoDestino.getIndice()) {
-						// Si esos nodos todavia tienen grado menor a regular los analizo
-						if (nodoOrigen.getGrado() < gradoRegular && nodoDestino.getGrado() < gradoRegular) {
-							if (!isAdyacentes(nodoOrigen.getIndice(), nodoDestino.getIndice())) {
-
-								this.matrizAdyacencia.setNodo(nodoOrigen.getIndice(), nodoDestino.getIndice());
-								this.cantidadAristas++;
-								nodos[nodoOrigen.getIndice()].addGrado();
-								nodos[nodoDestino.getIndice()].addGrado();
-								nodosAux.get(indice1).addGrado();
-								nodosAux.get(indice2).addGrado();
-								
-								// Chequeo si alguno de los nodos llego al grado maximo y en ese caso lo quito del Map
-								if (nodosAux.get(indice1).getGrado() == gradoRegular) {
-									nodosAux.remove(indice1);
-								}
-								if (nodosAux.get(indice2).getGrado() == gradoRegular) {
-									nodosAux.remove(indice2);
-								}	
+			for (int i = 0; i < this.cantidadNodos; i++) {
+				for (int j = i; j < this.cantidadNodos; j++) {
+					if (i != j) {
+						if (!isAdyacentes(nodos[i].getIndice(), nodos[j].getIndice())) {
+							if (nodos[i].getGrado() == gradoRegular || nodos[j].getGrado() == gradoRegular) {
+								break;
 							}
-						}
+							this.matrizAdyacencia.setNodo(nodos[i].getIndice(), nodos[j].getIndice());
+							this.cantidadAristas++;
+							nodos[i].addGrado();
+							nodos[j].addGrado();													
+						}	
 					}
 				}
 			}
@@ -165,7 +131,7 @@ public class Generador extends GrafoNDNP {
 	}
 
 	public void grafoRegularDadoNYPorcentajeAdy(int cantNodos, int porcentajeAdy) {
-		int aux = (int) ((Math.rint((cantNodos * cantNodos - cantNodos) * 0.5* (porcentajeAdy / 100.0))) / 2);
+		int aux = (int) ((Math.rint((cantNodos * cantNodos - cantNodos) * 0.5* (porcentajeAdy / 100.0))) / cantNodos);
 		grafoRegularDadoNYGrado(cantNodos,aux);
 	}
 
@@ -226,9 +192,15 @@ public class Generador extends GrafoNDNP {
 		Generador generador = new Generador();
 		//generador.grafoDadoNYPorcentajeAdy(600, 90);
 		//generador.grafoDadoNYProbAristas(4,0.5);
-		//generador.grafoRegularDadoNYGrado(6, 3);
-		generador.grafoRegularDadoNYPorcentajeAdy(1000, 50);
+		//generador.grafoRegularDadoNYGrado(100, 50);
 		//generador.grafoNPartito(6, 2);
+		//generador.exportarGrafo("grafo.in");
+		
+		generador.grafoRegularDadoNYPorcentajeAdy(1000, 50);
 		generador.exportarGrafo("grafoRegular_1000_50ady.in");
+
+		generador.grafoRegularDadoNYPorcentajeAdy(1000, 75);
+		generador.exportarGrafo("grafoRegular_1000_75ady.in");
+
 	}
 }

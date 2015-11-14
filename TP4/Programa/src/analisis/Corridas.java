@@ -7,7 +7,7 @@ import java.util.Arrays;
 import model.GrafoNDNP;
 
 public class Corridas {
-	final static String FILE_NAME = "grafo_600_90ady";
+	final static String FILE_NAME = "grafo_600_40ady";
 	final static String DIR_OUT = "src/analisis/OUT/";
 	final static String DIR_IN = "src/analisis/IN/";
 	final static String DIR_PLOT = "src/analisis/PLOT/";
